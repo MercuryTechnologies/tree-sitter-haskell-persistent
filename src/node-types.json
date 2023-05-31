@@ -1,11 +1,35 @@
 [
   {
-    "type": "source_file",
+    "type": "comment",
     "named": true,
     "fields": {}
   },
   {
-    "type": "hello",
-    "named": false
+    "type": "entity_name",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "quasi_quotation",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "entity_name",
+          "named": true
+        },
+        {
+          "type": "is_sum_marker",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "is_sum_marker",
+    "named": true
   }
 ]
