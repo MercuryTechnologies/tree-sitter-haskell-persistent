@@ -18,9 +18,6 @@ enum TokenType {
   STRING_CONTENT,
   STRING_END,
   COMMENT,
-  CLOSE_PAREN,
-  CLOSE_BRACKET,
-  CLOSE_BRACE,
 };
 
 struct Delimiter {
@@ -154,7 +151,6 @@ struct Scanner {
 
   bool scan(TSLexer *lexer, const bool *valid_symbols) {
     bool error_recovery_mode = valid_symbols[STRING_CONTENT] && valid_symbols[INDENT];
-    bool within_brackets = valid_symbols[CLOSE_BRACE] || valid_symbols[CLOSE_PAREN] || valid_symbols[CLOSE_BRACKET];
     
     if (valid_symbols[STRING_CONTENT] && !delimiter_stack.empty() && !error_recovery_mode) {
       Delimiter delimiter = delimiter_stack.back();
@@ -299,7 +295,7 @@ struct Scanner {
         }
 
         if (
-          (valid_symbols[DEDENT] || (!valid_symbols[NEWLINE] && !within_brackets)) &&
+          (valid_symbols[DEDENT] || !valid_symbols[NEWLINE]) &&
           indent_length < current_indent_length &&
 
           // Wait to create a dedent token until we've consumed any comments
@@ -386,27 +382,27 @@ struct Scanner {
 
 extern "C" {
 
-void *tree_sitter_python_external_scanner_create() {
+void *tree_sitter_haskell_persistent_external_scanner_create() {
   return new Scanner();
 }
 
-bool tree_sitter_python_external_scanner_scan(void *payload, TSLexer *lexer,
+bool tree_sitter_haskell_persistent_external_scanner_scan(void *payload, TSLexer *lexer,
                                             const bool *valid_symbols) {
   Scanner *scanner = static_cast<Scanner *>(payload);
   return scanner->scan(lexer, valid_symbols);
 }
 
-unsigned tree_sitter_python_external_scanner_serialize(void *payload, char *buffer) {
+unsigned tree_sitter_haskell_persistent_external_scanner_serialize(void *payload, char *buffer) {
   Scanner *scanner = static_cast<Scanner *>(payload);
   return scanner->serialize(buffer);
 }
 
-void tree_sitter_python_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {
+void tree_sitter_haskell_persistent_external_scanner_deserialize(void *payload, const char *buffer, unsigned length) {
   Scanner *scanner = static_cast<Scanner *>(payload);
   scanner->deserialize(buffer, length);
 }
 
-void tree_sitter_python_external_scanner_destroy(void *payload) {
+void tree_sitter_haskell_persistent_external_scanner_destroy(void *payload) {
   Scanner *scanner = static_cast<Scanner *>(payload);
   delete scanner;
 }
