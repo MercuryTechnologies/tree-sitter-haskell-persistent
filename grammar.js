@@ -31,12 +31,12 @@ module.exports = grammar({
 
     entity_body: $ => choice(
       seq(
-        repeat($._entity_line_definition),
-        repeat1($._entity_derives),
+        repeat1($._entity_line_definition),
+        repeat($.entity_derives),
       ),
       seq(
-        repeat1($._entity_line_definition),
-        repeat($._entity_derives),
+        repeat($._entity_line_definition),
+        repeat1($.entity_derives),
       ),
     ),
 
@@ -44,6 +44,8 @@ module.exports = grammar({
 
     // from tree-sitter-haskell, varid_pattern
     _varid: _ => /[_\p{Ll}](\w|')*#?/u,
+
+    variable: $ => $._varid,
 
     // from tree-sitter-haskell, _conid
     _conid: _ => /[\p{Lu}\p{Lt}](\w|')*/u,
@@ -58,7 +60,7 @@ module.exports = grammar({
 
     _entity_name: $ => alias($._conid, $.identifier),
 
-    field_name: $ => alias($._varid, $.identifier),
+    _field_name: $ => $.variable,
 
     _haskell_constraint_name: $ => alias($._conid, $.identifier),
 
@@ -86,13 +88,13 @@ module.exports = grammar({
 
     _surrogate_key: $ => seq(
       'Id',
-      $.field_type,
+      $._field_type,
       repeat($._key_attribute)
     ),
 
     _natural_key: $ => seq(
       'Primary',
-      repeat1($.field_name),
+      repeat1($._field_name),
       repeat($._key_attribute)
     ),
 
@@ -107,14 +109,17 @@ module.exports = grammar({
 
     field_definition: $ => seq(
       optional($._field_strictness_prefix),
-      field('name', $.field_name),
-      $.field_type,
+      field('name', $._field_name),
+      $._field_type,
       repeat($._field_attribute)
     ),
 
     _field_strictness_prefix: _ => /[~!]/,
 
-    field_type: $ => choice(
+    _field_type: $ => $.type,
+
+    // TODO: separate list from plain type constructor
+    type: $ => choice(
       $._conid,
       seq('[', $._conid, ']')
     ),
@@ -126,7 +131,7 @@ module.exports = grammar({
     // Persistent has yet one more style of unique declaration that starts with a whole word "Unique". It has no examples or tests, and github code search finds no examples of it either.
     _unique_constraint: $ => seq(
       $._haskell_constraint_name,
-      repeat1($.field_name),
+      repeat1($._field_name),
       repeat($._unique_constraint_attribute)
     ),
 
@@ -140,16 +145,16 @@ module.exports = grammar({
       $._entity_name,
       optional($._cascade_actions),
       $._constraint_name,
-      repeat1($.field_name),
+      repeat1($._field_name),
       optional(seq(
         'References',
-        repeat1($.field_name)
+        repeat1($._field_name)
       ))
     ),
 
-    _class_name: $ => alias($._conid, $.identifier),
+    _class_name: $ => alias($._conid, $.type),
 
-    _entity_derives: $ => seq(
+    entity_derives: $ => seq(
       'deriving',
       repeat1($._class_name)
     )

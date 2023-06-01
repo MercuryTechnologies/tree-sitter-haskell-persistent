@@ -26,6 +26,52 @@ Person
     (identifier)
     (entity_body
       (field_definition
-        (field_name
-          (identifier))
-        (field_type)))))
+        (variable)
+        (type)))))
+
+================================================================================
+Entity with deriving classes
+================================================================================
+
+Person
+  name Text
+  deriving Show
+  deriving Eq Ord
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (identifier)
+    (entity_body
+      (field_definition
+        (variable)
+        (type))
+      (entity_derives
+        (type))
+      (entity_derives
+        (type)
+        (type)))))
+
+================================================================================
+Entity with extra newlines
+================================================================================
+
+Person
+
+  name Text
+
+  email Text
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (identifier)
+    (entity_body
+      (field_definition
+        (variable)
+        (type))
+      (field_definition
+        (variable)
+        (type)))))
