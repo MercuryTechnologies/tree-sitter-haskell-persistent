@@ -11,17 +11,34 @@ module.exports = grammar({
     $.comment
   ],
 
+  externals: $ => [
+    $._newline,
+    $._indent,
+    $._dedent,
+    $._string_start,
+    $._string_content,
+    $._string_end,
+  ],
+
   // Parsing type names and field names is based on tree-sitter-haskell, the rest is based on the parsing from Database.Persist.Quasi.Internal
   rules: {
-    quasi_quotation: $ => repeat($._entity_definition),
+    quasi_quotation: $ => repeat($.entity_definition),
 
-    _entity_definition: $ => seq(
+    entity_definition: $ => seq(
       $._entity_header,
-      repeat($._entity_line_definition),
-      repeat($._entity_derives)
+      optional(seq($._indent, $.entity_body, $._dedent))
     ),
 
-    _newline: _ => /\n|\r|\f/,
+    entity_body: $ => choice(
+      seq(
+        repeat($._entity_line_definition),
+        repeat1($._entity_derives),
+      ),
+      seq(
+        repeat1($._entity_line_definition),
+        repeat($._entity_derives),
+      ),
+    ),
 
     is_sum_marker: _ => '+',
 
@@ -47,15 +64,15 @@ module.exports = grammar({
 
     _entity_header: $ => seq(
       optional($.is_sum_marker),
-      $._entity_name,
-      $._entity_attributes,
+      field('name', $._entity_name),
+      repeat($._entity_attribute),
       $._newline
     ),
 
     _entity_line_definition: $ => seq(
       choice(
         $._entity_key,
-        $._field_definition,
+        $.field_definition,
         $._unique_constraint,
         $._foreign_constraint,
       ),
@@ -70,28 +87,29 @@ module.exports = grammar({
     _surrogate_key: $ => seq(
       'Id',
       $.field_type,
-      $._key_attributes
+      repeat($._key_attribute)
     ),
 
     _natural_key: $ => seq(
       'Primary',
       repeat1($.field_name),
-      $._key_attributes
+      repeat($._key_attribute)
     ),
 
-    _key_attributes: $ => $._attributes,
+    _key_attribute: $ => $._attribute,
 
-    _entity_attributes: $ => $._attributes,
+    _entity_attribute: $ => $._attribute,
 
-    _field_attributes: $ => $._attributes,
+    _field_attribute: $ => $._attribute,
 
-    _attributes: _ => /sql=\w+/,
+    // TODO: see tokenize in Database.Persist.Quasi.Internal
+    _attribute: _ => /sql=\w+/,
 
-    _field_definition: $ => seq(
+    field_definition: $ => seq(
       optional($._field_strictness_prefix),
-      alias($._varid, $.identifier),
+      field('name', $.field_name),
       $.field_type,
-      $._field_attributes
+      repeat($._field_attribute)
     ),
 
     _field_strictness_prefix: _ => /[~!]/,
@@ -109,10 +127,10 @@ module.exports = grammar({
     _unique_constraint: $ => seq(
       $._haskell_constraint_name,
       repeat1($.field_name),
-      $._unique_constraint_attributes
+      repeat($._unique_constraint_attribute)
     ),
 
-    _unique_constraint_attributes: $ => $._attributes,
+    _unique_constraint_attribute: $ => $._attribute,
 
     // TODO: varid allows unicode. Should constraint name allow it too?
     _constraint_name: $ => $._varid,

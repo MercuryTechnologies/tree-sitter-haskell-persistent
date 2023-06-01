@@ -17,7 +17,6 @@ enum TokenType {
   STRING_START,
   STRING_CONTENT,
   STRING_END,
-  COMMENT,
 };
 
 struct Delimiter {
@@ -235,7 +234,6 @@ struct Scanner {
 
     bool found_end_of_line = false;
     uint32_t indent_length = 0;
-    int32_t first_comment_indent_length = -1;
     for (;;) {
       if (lexer->lookahead == '\n') {
         found_end_of_line = true;
@@ -250,15 +248,6 @@ struct Scanner {
       } else if (lexer->lookahead == '\t') {
         indent_length += 8;
         skip(lexer);
-      } else if (lexer->lookahead == '#') {
-        if (first_comment_indent_length == -1) {
-          first_comment_indent_length = (int32_t)indent_length;
-        }
-        while (lexer->lookahead && lexer->lookahead != '\n') {
-          skip(lexer);
-        }
-        skip(lexer);
-        indent_length = 0;
       } else if (lexer->lookahead == '\\') {
         skip(lexer);
         if (lexer->lookahead == '\r') {
@@ -296,11 +285,7 @@ struct Scanner {
 
         if (
           (valid_symbols[DEDENT] || !valid_symbols[NEWLINE]) &&
-          indent_length < current_indent_length &&
-
-          // Wait to create a dedent token until we've consumed any comments
-          // whose indentation matches the current block.
-          first_comment_indent_length < (int32_t)current_indent_length
+          indent_length < current_indent_length
         ) {
           indent_length_stack.pop_back();
           lexer->result_symbol = DEDENT;
@@ -314,7 +299,7 @@ struct Scanner {
       }
     }
 
-    if (first_comment_indent_length == -1 && valid_symbols[STRING_START]) {
+    if (valid_symbols[STRING_START]) {
       Delimiter delimiter;
 
       bool has_flags = false;
