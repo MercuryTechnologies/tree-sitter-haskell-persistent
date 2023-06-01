@@ -159,13 +159,8 @@
       ]
     },
     "_entity_name": {
-      "type": "ALIAS",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_conid"
-      },
-      "named": true,
-      "value": "identifier"
+      "type": "SYMBOL",
+      "name": "type_name"
     },
     "_field_name": {
       "type": "SYMBOL",
@@ -175,10 +170,10 @@
       "type": "ALIAS",
       "content": {
         "type": "SYMBOL",
-        "name": "_conid"
+        "name": "type_name"
       },
       "named": true,
-      "value": "identifier"
+      "value": "type"
     },
     "_entity_header": {
       "type": "SEQ",
@@ -267,8 +262,12 @@
           "value": "Id"
         },
         {
-          "type": "SYMBOL",
-          "name": "_field_type"
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_type"
+          }
         },
         {
           "type": "REPEAT",
@@ -342,8 +341,12 @@
           }
         },
         {
-          "type": "SYMBOL",
-          "name": "_field_type"
+          "type": "FIELD",
+          "name": "type",
+          "content": {
+            "type": "SYMBOL",
+            "name": "_type"
+          }
         },
         {
           "type": "REPEAT",
@@ -358,33 +361,74 @@
       "type": "PATTERN",
       "value": "[~!]"
     },
-    "_field_type": {
-      "type": "SYMBOL",
-      "name": "type"
-    },
-    "type": {
+    "_type": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_conid"
+          "name": "type_name"
         },
         {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "STRING",
-              "value": "["
-            },
-            {
-              "type": "SYMBOL",
-              "name": "_conid"
-            },
-            {
-              "type": "STRING",
-              "value": "]"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "type_list"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "type_tuple"
+        }
+      ]
+    },
+    "type_name": {
+      "type": "SYMBOL",
+      "name": "_conid"
+    },
+    "type_list": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "["
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_type"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "type_tuple": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "("
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_type"
+        },
+        {
+          "type": "REPEAT1",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_type"
+              }
+            ]
+          }
+        },
+        {
+          "type": "STRING",
+          "value": ")"
         }
       ]
     },

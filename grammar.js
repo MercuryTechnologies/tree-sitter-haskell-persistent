@@ -58,11 +58,11 @@ module.exports = grammar({
       token(seq('#', /.*/)),
     ),
 
-    _entity_name: $ => alias($._conid, $.identifier),
+    _entity_name: $ => $.type_name,
 
     _field_name: $ => $.variable,
 
-    _haskell_constraint_name: $ => alias($._conid, $.identifier),
+    _haskell_constraint_name: $ => alias($.type_name, $.type),
 
     _entity_header: $ => seq(
       optional($.is_sum_marker),
@@ -88,7 +88,7 @@ module.exports = grammar({
 
     _surrogate_key: $ => seq(
       'Id',
-      $._field_type,
+      field('type', $._type),
       repeat($._key_attribute)
     ),
 
@@ -110,19 +110,24 @@ module.exports = grammar({
     field_definition: $ => seq(
       optional($._field_strictness_prefix),
       field('name', $._field_name),
-      $._field_type,
+      field('type', $._type),
       repeat($._field_attribute)
     ),
 
     _field_strictness_prefix: _ => /[~!]/,
 
-    _field_type: $ => $.type,
-
-    // TODO: separate list from plain type constructor
-    type: $ => choice(
-      $._conid,
-      seq('[', $._conid, ']')
+    _type: $ => choice(
+      $.type_name,
+      $.type_list,
+      $.type_tuple
     ),
+
+    // Only type constructors. Persistent doesn't have type variables.
+    type_name: $ => $._conid,
+
+    type_list: $ => seq('[', $._type, ']'),
+
+    type_tuple: $ => seq('(', $._type, repeat1(seq(',', $._type)), ')'),
 
     _cascade_action: _ => /OnDelete\w+|OnUpdate\w+/,
 

@@ -10,7 +10,7 @@ Person
 (quasi_quotation
   (comment)
   (entity_definition
-    (identifier)))
+    (type_name)))
 
 ================================================================================
 Entity with one field
@@ -23,11 +23,11 @@ Person
 
 (quasi_quotation
   (entity_definition
-    (identifier)
+    (type_name)
     (entity_body
       (field_definition
         (variable)
-        (type)))))
+        (type_name)))))
 
 ================================================================================
 Entity with deriving classes
@@ -42,11 +42,11 @@ Person
 
 (quasi_quotation
   (entity_definition
-    (identifier)
+    (type_name)
     (entity_body
       (field_definition
         (variable)
-        (type))
+        (type_name))
       (entity_derives
         (type))
       (entity_derives
@@ -67,11 +67,48 @@ Person
 
 (quasi_quotation
   (entity_definition
-    (identifier)
+    (type_name)
     (entity_body
       (field_definition
         (variable)
-        (type))
+        (type_name))
       (field_definition
         (variable)
-        (type)))))
+        (type_name)))))
+
+================================================================================
+Entity with a list field
+================================================================================
+
+Person
+  names [Text]
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name)
+    (entity_body
+      (field_definition
+        (variable)
+        (type_list
+          (type_name))))))
+
+================================================================================
+Entity with a tuple field
+================================================================================
+
+Person
+  names (Text, Text)
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name)
+    (entity_body
+      (field_definition
+        (variable)
+        (type_tuple
+          (type_name)
+          (type_name))))))
