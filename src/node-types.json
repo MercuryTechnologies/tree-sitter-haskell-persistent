@@ -148,11 +148,6 @@
     }
   },
   {
-    "type": "comment",
-    "named": true,
-    "fields": {}
-  },
-  {
     "type": "con_list",
     "named": true,
     "fields": {}
@@ -2289,6 +2284,10 @@
   },
   {
     "type": "comma",
+    "named": true
+  },
+  {
+    "type": "comment",
     "named": true
   },
   {

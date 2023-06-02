@@ -156,14 +156,8 @@ module.exports = grammar({
 
     is_sum_marker: _ => '+',
 
-    _doc_comment: _ => token(seq('-- | ', /.*/)),
-
-    comment: $ => choice(
-      $._doc_comment,
-      token(seq('--', /.*/ )),
-      token(seq('#', /.*/)),
-    ),
-
+    comment: _ => /(#|--).*/,
+    
     _entity_name: $ => $.type_name,
 
     _field_name: $ => $.variable,

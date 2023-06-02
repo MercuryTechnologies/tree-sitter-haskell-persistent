@@ -90,62 +90,9 @@
       "type": "STRING",
       "value": "+"
     },
-    "_doc_comment": {
-      "type": "TOKEN",
-      "content": {
-        "type": "SEQ",
-        "members": [
-          {
-            "type": "STRING",
-            "value": "-- | "
-          },
-          {
-            "type": "PATTERN",
-            "value": ".*"
-          }
-        ]
-      }
-    },
     "comment": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "_doc_comment"
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "-- "
-              },
-              {
-                "type": "PATTERN",
-                "value": ".*"
-              }
-            ]
-          }
-        },
-        {
-          "type": "TOKEN",
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "#"
-              },
-              {
-                "type": "PATTERN",
-                "value": ".*"
-              }
-            ]
-          }
-        }
-      ]
+      "type": "PATTERN",
+      "value": "(#|--).*"
     },
     "_entity_name": {
       "type": "SYMBOL",

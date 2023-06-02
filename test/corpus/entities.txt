@@ -1,14 +1,12 @@
 ================================================================================
-Empty entity with comment
+Empty entity
 ================================================================================
 
--- | Person data type
 Person
 
 --------------------------------------------------------------------------------
 
 (quasi_quotation
-  (comment)
   (entity_definition
     (type_name
       (type))))
@@ -33,13 +31,11 @@ Person
           (type))))))
 
 ================================================================================
-Entity with comments
+Indented entity
 ================================================================================
 
--- | comment
-Person  -- | comment
---  comment
-  name Text -- comment
+  Person
+    name Text
 
 --------------------------------------------------------------------------------
 
@@ -48,6 +44,63 @@ Person  -- | comment
     (type_name
       (type))
     (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type))))))
+
+================================================================================
+Entity with CPP comment
+================================================================================
+
+  -- | Doc comment
+  # CPP comment
+  -- Line comment
+  Person
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (comment)
+  (comment)
+  (comment)
+  (entity_definition
+    (type_name
+      (type))))
+
+================================================================================
+Entity with comments
+================================================================================
+
+  -- | Doc comment
+  Person  -- same line as entity name
+-- indented 1
+  -- indented 2
+    -- indented 3
+      -- indented 4
+    name Text -- field comment
+    -- between entity lines
+    email Text
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (comment)
+  (entity_definition
+    (type_name
+      (type))
+    (comment)
+    (comment)
+    (comment)
+    (comment)
+    (comment)
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (comment)
+      (comment)
       (field_definition
         (variable)
         (type_name
