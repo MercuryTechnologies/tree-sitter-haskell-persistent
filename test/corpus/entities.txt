@@ -266,6 +266,36 @@ Person
             (string)))))))
 
 ================================================================================
+Entity with composite primary key
+================================================================================
+
+Email
+    firstPart   Text
+    secondPart  Text
+
+    Primary firstPart secondPart
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (natural_key
+        (fields
+          (variable)
+          (variable))))))
+
+================================================================================
 Entity with field attributes
 ================================================================================
 
@@ -320,7 +350,8 @@ Person
           (type)))
       (unique_constraint
         (constructor)
-        (variable)
+        (fields
+          (variable))
         (attributes
           (key_value_attribute
             (name)
@@ -330,10 +361,49 @@ Person
 Entity with foreign constraint
 ================================================================================
 
-Person
-  name Text
-  email Text
-  UniqueEmail email sql=email_id_key
+User
+    name            Text
+    emailFirstPart  Text
+    emailSecondPart Text
+
+    Foreign Email fk_user_email emailFirstPart emailSecondPart
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (foreign_constraint
+        (type_name
+          (type))
+        (sql_constraint_name)
+        (fields
+          (variable)
+          (variable))))))
+
+================================================================================
+Entity with foreign constraint, cascade
+================================================================================
+
+User
+    name            Text
+    emailFirstPart  Text
+    emailSecondPart Text
+
+    Foreign Email OnDeleteCascade OnUpdateCascade fk_user_email emailFirstPart emailSecondPart
 
 --------------------------------------------------------------------------------
 
@@ -350,10 +420,58 @@ Person
         (variable)
         (type_name
           (type)))
-      (unique_constraint
-        (constructor)
+      (field_definition
         (variable)
-        (attributes
-          (key_value_attribute
-            (name)
-            (string)))))))
+        (type_name
+          (type)))
+      (foreign_constraint
+        (type_name
+          (type))
+        (cascade_action)
+        (cascade_action)
+        (sql_constraint_name)
+        (fields
+          (variable)
+          (variable))))))
+
+================================================================================
+Entity with foreign constraint, reference
+================================================================================
+
+User
+    name            Text
+    emailFirstPart  Text
+    emailSecondPart Text
+
+    Foreign Email fk_user_email emailFirstPart emailSecondPart References firstPart secondPart
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (foreign_constraint
+        (type_name
+          (type))
+        (sql_constraint_name)
+        (fields
+          (variable)
+          (variable))
+        (references
+          (fields
+            (variable)
+            (variable)))))))

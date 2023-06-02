@@ -198,11 +198,13 @@ module.exports = grammar({
 
     natural_key: $ => seq(
       'Primary',
-      repeat1($._field_name),
-      alias(repeat($._key_attribute), $.attributes)
+      $._list_of_fields,
+      // alias(repeat($._key_attribute), $.attributes)
     ),
 
     _key_attribute: $ => $._field_attribute,
+
+    _list_of_fields: $ => alias(repeat1($._field_name), $.fields),
 
     _entity_attribute: $ => choice(
       $.key_value_attribute,
@@ -249,7 +251,7 @@ module.exports = grammar({
     // Persistent has yet one more style of unique declaration that starts with a whole word "Unique". It has no examples or tests, and github code search finds no examples of it either.
     unique_constraint: $ => seq(
       $._haskell_constraint_name,
-      repeat1($._field_name),
+      $._list_of_fields,
       alias(repeat($._unique_constraint_attribute), $.attributes)
     ),
 
@@ -258,18 +260,20 @@ module.exports = grammar({
       $.key_value_attribute
     ),
 
-    _sql_constraint_name: _ => /[a-z][\w]+/,
+    sql_constraint_name: _ => /[a-zA-Z][\w]+/,
 
     foreign_constraint: $ => seq(
       'Foreign',
       $._entity_name,
       repeat($.cascade_action),
-      $._sql_constraint_name,
-      repeat1($._field_name),
-      optional(seq(
-        'References',
-        repeat1($._field_name)
-      ))
+      $.sql_constraint_name,
+      $._list_of_fields,
+      optional(
+        seq(
+          'References',
+          alias($._list_of_fields, $.references)
+        )
+      )
     ),
 
     // See deriving in tree-sitter-haskell/grammar/data.js for the complete syntax. Persistent only supports a list of class names

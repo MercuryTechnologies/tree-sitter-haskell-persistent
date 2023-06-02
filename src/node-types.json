@@ -574,6 +574,21 @@
     }
   },
   {
+    "type": "fields",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "variable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "forall",
     "named": true,
     "fields": {},
@@ -653,11 +668,19 @@
           "named": true
         },
         {
-          "type": "type_name",
+          "type": "fields",
           "named": true
         },
         {
-          "type": "variable",
+          "type": "references",
+          "named": true
+        },
+        {
+          "type": "sql_constraint_name",
+          "named": true
+        },
+        {
+          "type": "type_name",
           "named": true
         }
       ]
@@ -1116,15 +1139,11 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": true,
       "types": [
         {
-          "type": "attributes",
-          "named": true
-        },
-        {
-          "type": "variable",
+          "type": "fields",
           "named": true
         }
       ]
@@ -1469,6 +1488,21 @@
       "types": [
         {
           "type": "entity_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "references",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "fields",
           "named": true
         }
       ]
@@ -2148,7 +2182,7 @@
           "named": true
         },
         {
-          "type": "variable",
+          "type": "fields",
           "named": true
         }
       ]
@@ -2361,6 +2395,10 @@
   {
     "type": "role",
     "named": false
+  },
+  {
+    "type": "sql_constraint_name",
+    "named": true
   },
   {
     "type": "string",

@@ -226,29 +226,26 @@
           "value": "Primary"
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_field_name"
-          }
-        },
-        {
-          "type": "ALIAS",
-          "content": {
-            "type": "REPEAT",
-            "content": {
-              "type": "SYMBOL",
-              "name": "_key_attribute"
-            }
-          },
-          "named": true,
-          "value": "attributes"
+          "type": "SYMBOL",
+          "name": "_list_of_fields"
         }
       ]
     },
     "_key_attribute": {
       "type": "SYMBOL",
       "name": "_field_attribute"
+    },
+    "_list_of_fields": {
+      "type": "ALIAS",
+      "content": {
+        "type": "REPEAT1",
+        "content": {
+          "type": "SYMBOL",
+          "name": "_field_name"
+        }
+      },
+      "named": true,
+      "value": "fields"
     },
     "_entity_attribute": {
       "type": "CHOICE",
@@ -409,11 +406,8 @@
           "name": "_haskell_constraint_name"
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_field_name"
-          }
+          "type": "SYMBOL",
+          "name": "_list_of_fields"
         },
         {
           "type": "ALIAS",
@@ -442,9 +436,9 @@
         }
       ]
     },
-    "_sql_constraint_name": {
+    "sql_constraint_name": {
       "type": "PATTERN",
-      "value": "[a-z][\\w]+"
+      "value": "[a-zA-Z][\\w]+"
     },
     "foreign_constraint": {
       "type": "SEQ",
@@ -466,14 +460,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "_sql_constraint_name"
+          "name": "sql_constraint_name"
         },
         {
-          "type": "REPEAT1",
-          "content": {
-            "type": "SYMBOL",
-            "name": "_field_name"
-          }
+          "type": "SYMBOL",
+          "name": "_list_of_fields"
         },
         {
           "type": "CHOICE",
@@ -486,11 +477,13 @@
                   "value": "References"
                 },
                 {
-                  "type": "REPEAT1",
+                  "type": "ALIAS",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "_field_name"
-                  }
+                    "name": "_list_of_fields"
+                  },
+                  "named": true,
+                  "value": "references"
                 }
               ]
             },
