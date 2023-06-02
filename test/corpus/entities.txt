@@ -10,7 +10,8 @@ Person
 (quasi_quotation
   (comment)
   (entity_definition
-    (type_name)))
+    (type_name
+      (type))))
 
 ================================================================================
 Entity with one field
@@ -23,11 +24,13 @@ Person
 
 (quasi_quotation
   (entity_definition
-    (type_name)
+    (type_name
+      (type))
     (entity_body
       (field_definition
         (variable)
-        (type_name)))))
+        (type_name
+          (type))))))
 
 ================================================================================
 Entity with deriving classes
@@ -42,11 +45,13 @@ Person
 
 (quasi_quotation
   (entity_definition
-    (type_name)
+    (type_name
+      (type))
     (entity_body
       (field_definition
         (variable)
-        (type_name))
+        (type_name
+          (type)))
       (entity_derives
         (type))
       (entity_derives
@@ -67,14 +72,17 @@ Person
 
 (quasi_quotation
   (entity_definition
-    (type_name)
+    (type_name
+      (type))
     (entity_body
       (field_definition
         (variable)
-        (type_name))
+        (type_name
+          (type)))
       (field_definition
         (variable)
-        (type_name)))))
+        (type_name
+          (type))))))
 
 ================================================================================
 Entity with a list field
@@ -87,12 +95,14 @@ Person
 
 (quasi_quotation
   (entity_definition
-    (type_name)
+    (type_name
+      (type))
     (entity_body
       (field_definition
         (variable)
         (type_list
-          (type_name))))))
+          (type_name
+            (type)))))))
 
 ================================================================================
 Entity with a tuple field
@@ -105,13 +115,17 @@ Person
 
 (quasi_quotation
   (entity_definition
-    (type_name)
+    (type_name
+      (type))
     (entity_body
       (field_definition
         (variable)
         (type_tuple
-          (type_name)
-          (type_name))))))
+          (type_name
+            (type))
+          (comma)
+          (type_name
+            (type)))))))
 
 ================================================================================
 Entity with ticked type
@@ -127,14 +141,34 @@ CustomerTransfer
 
 (quasi_quotation
   (entity_definition
-    (type_name)
+    (type_name
+      (type))
     (entity_body
       (field_definition
         (variable)
-        (type_tuple
-          (type_name)
-          (type_name))))))
-          
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_parens
+          (type_apply
+            (type_name
+              (type))
+            (type_name
+              (promoted
+                (type)))
+            (type_name
+              (promoted
+                (type))))))
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_name
+          (type))))))
+
 ================================================================================
 Entity with custom id column
 ================================================================================
@@ -145,6 +179,10 @@ Person
 --------------------------------------------------------------------------------
 
 (quasi_quotation
-  (comment)
   (entity_definition
-    (type_name)))
+    (type_name
+      (type))
+    (entity_body
+      (surrogate_key
+        (type_name
+          (type))))))

@@ -29,10 +29,10 @@ module.exports = {
     optional($.comma), // for trailing commas at the end of an export list
   ),
 
-  _module: $ => seq(
-    'module',
-    field('module', $._qmodid),
-    optional($.exports),
-    where($, $._topdecl),
-  ),
+  // _module: $ => seq(
+  //   'module',
+  //   field('module', $._qmodid),
+  //   optional($.exports),
+  //   where($, $._topdecl),
+  // ),
 }

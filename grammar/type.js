@@ -62,9 +62,9 @@ module.exports = {
     $._type_promotable_literal,
   ),
 
-  strict_type: $ => seq($._strict, $._atype),
+  // strict_type: $ => seq($._strict, $._atype),
 
-  lazy_type: $ => seq($._lazy, $._atype),
+  // lazy_type: $ => seq($._lazy, $._atype),
 
   type_name: $ => choice(
     $._tyvar,
@@ -76,19 +76,19 @@ module.exports = {
   /**
   * The `(##)` format of the unit tuple is parsed as an operator, see `exp_unboxed_tuple`.
   */
-  type_unboxed_tuple: $ => seq($._unboxed_open, sep($.comma, $._type_with_kind), $._unboxed_close),
+  // type_unboxed_tuple: $ => seq($._unboxed_open, sep($.comma, $._type_with_kind), $._unboxed_close),
 
-  type_unboxed_sum: $ => seq($._unboxed_open, $._type_sum, $._unboxed_close),
+  // type_unboxed_sum: $ => seq($._unboxed_open, $._type_sum, $._unboxed_close),
 
   _atype: $ => choice(
     $.type_name,
     $.type_star,
     $._type_literal,
     $.type_parens,
-    $.type_unboxed_tuple,
-    $.type_unboxed_sum,
-    $.splice,
-    $.quasiquote,
+    // $.type_unboxed_tuple,
+    // $.type_unboxed_sum,
+    // $.splice,
+    // $.quasiquote,
   ),
 
   type_invisible: $ => seq('@', $._atype),
@@ -253,12 +253,12 @@ module.exports = {
     optional(choice($._type_annotation, $._tyfam_inj)),
   ),
 
-  decl_tyfam: $ => seq(
-    'type',
-    'family',
-    $._tyfam,
-    optional(where($, alias($.tyfam_eq, $.equation))),
-  ),
+  // decl_tyfam: $ => seq(
+  //   'type',
+  //   'family',
+  //   $._tyfam,
+  //   optional(where($, alias($.tyfam_eq, $.equation))),
+  // ),
 
   _tyinst: $ => seq(
     repeat(choice($._atype, $.type_invisible)),

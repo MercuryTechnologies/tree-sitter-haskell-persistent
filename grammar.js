@@ -26,6 +26,115 @@ module.exports = grammar({
     $._string_end,
   ],
 
+  precedences: _ => [
+    [
+      'context-empty',
+      'con_unit',
+    ],
+    [
+      'infix-type',
+      'btype',
+    ],
+    [
+      'function-type',
+      'type',
+    ],
+  ],
+
+  inline: $ => [
+    $._number,
+    $._stringly,
+    $._qvarid,
+    $._operator_minus,
+    $._qvarsym,
+    $._qvarsym_nominus,
+    $._var,
+    $._qvar,
+    $._tyvar,
+    $._qconid,
+    $._qconsym,
+    $._con,
+    $._conop,
+    $._qconop,
+    $._op,
+    $._qop_nominus,
+    $._gcon_literal,
+    $._gcon,
+    $._tyconid,
+    $._qtyconid,
+    $._qtyconsym,
+    $._qtycon,
+    $._gtycon,
+    $._simple_tycon,
+    $._simple_tyconop,
+    $._simple_qtyconop,
+    $._quantifiers,
+    $._tyfam_pat_prefix,
+    $._tyfam_pat_infix,
+    $._qualifying_module,
+  ],
+
+  conflicts: $ => [
+    /**
+     * This could be done with the second named precedence further up, but it somehow overrides symbolic infix
+     * constructors.
+     * Needs more investigation.
+     */
+    [$._type_infix, $.type_infix],
+
+    /**
+     * Optional context for a data/newtype decl with infix types:
+     *
+     * data a ~ b => A a b
+     * data a + b
+     */
+    [$.type_name, $._simpletype_infix],
+
+    /**
+     * Same as above, but with regular types:
+     *
+     * data A a b
+     * data C a b => A a b
+     * data C Int a => A a
+     * data B Int ~ B a => A a
+     */
+    [$.type_name, $._simpletype],
+    [$._atype, $.constraint],
+
+    /**
+     * Constraints and parenthesized types.
+     *
+     * data (A a) => A
+     * data (A a) %% A => A
+     *
+     * After the `a`, the closing paren is ambiguous.
+     */
+    [$._type_infix, $.constraint],
+
+    /**
+     * Ambiguity between symbolic and regular type family equations.
+     */
+    [$.type_name, $.tyfam_pat],
+
+    /**
+     * Same as `exp_apply`, but for types.
+     */
+    [$.type_apply, $._btype],
+    [$.type_apply],
+
+    /**
+     * Implicit parameters have slightly weird restrictions.
+     */
+    [$._type_or_implicit, $._context_constraints],
+
+    /**
+     * General kind signatures cause `(a :: k)` to be ambiguous.
+     * This problem might be solvable if `type.js` were to be refactored.
+     */
+    [$.annotated_type_variable, $.type_name],
+
+  ],
+  
   // Parsing type names and field names is based on tree-sitter-haskell, the rest is based on the parsing from Database.Persist.Quasi.Internal
   rules: {
     quasi_quotation: $ => repeat($.entity_definition),
@@ -48,14 +157,6 @@ module.exports = grammar({
 
     is_sum_marker: _ => '+',
 
-    // from tree-sitter-haskell, varid_pattern
-    _varid: _ => /[_\p{Ll}](\w|')*#?/u,
-
-    variable: $ => $._varid,
-
-    // from tree-sitter-haskell, _conid
-    _conid: _ => /[\p{Lu}\p{Lt}](\w|')*/u,
-
     _doc_comment: _ => token(seq('-- | ', /.*/)),
 
     comment: $ => choice(
@@ -64,13 +165,19 @@ module.exports = grammar({
       token(seq('#', /.*/)),
     ),
 
+    // Extra definitions that the haskell grammar depends on. In tree-sitter-haskell they are external and are defined in scanner.c.
     comma: _ => ',',
+    _dot: _ => '.',
+    // See https://www.haskell.org/onlinereport/haskell2010/haskellch2.html#x7-180002.4. The definitions below ignore the reserved operators for simplicity.
+    _varsym: _ => /[!#$%&⋆+./<=>?@\|^~:]+/,
+    _consym: _ => /:[!#$%&⋆+./<=>?@\|^~:-]+/,
+    _tyconsym: _ => /[!#$%&⋆+./<=>?@\|^~:-]+/,
     
     _entity_name: $ => $.type_name,
 
     _field_name: $ => $.variable,
 
-    _haskell_constraint_name: $ => alias($.type_name, $.type),
+    _haskell_constraint_name: $ => $.constructor,
 
     _entity_header: $ => seq(
       optional($.is_sum_marker),
@@ -83,24 +190,24 @@ module.exports = grammar({
       choice(
         $._entity_key,
         $.field_definition,
-        $._unique_constraint,
-        $._foreign_constraint,
+        $.unique_constraint,
+        $.foreign_constraint,
       ),
       $._newline
     ),
 
     _entity_key: $ => choice(
-      $._surrogate_key,
-      $._natural_key
+      $.surrogate_key,
+      $.natural_key
     ),
 
-    _surrogate_key: $ => seq(
+    surrogate_key: $ => seq(
       'Id',
       field('type', $._type),
       repeat($._key_attribute)
     ),
 
-    _natural_key: $ => seq(
+    natural_key: $ => seq(
       'Primary',
       repeat1($._field_name),
       repeat($._key_attribute)
@@ -113,7 +220,7 @@ module.exports = grammar({
     _field_attribute: $ => $._attribute,
 
     // TODO: see tokenize in Database.Persist.Quasi.Internal
-    _attribute: _ => /sql=\w+/,
+    _attribute: _ => 'default=uuid_generate_v1mc()',
 
     field_definition: $ => seq(
       optional($._field_strictness_prefix),
@@ -129,7 +236,7 @@ module.exports = grammar({
     _cascade_actions: $ => repeat1($._cascade_action),
 
     // Persistent has yet one more style of unique declaration that starts with a whole word "Unique". It has no examples or tests, and github code search finds no examples of it either.
-    _unique_constraint: $ => seq(
+    unique_constraint: $ => seq(
       $._haskell_constraint_name,
       repeat1($._field_name),
       repeat($._unique_constraint_attribute)
@@ -137,14 +244,13 @@ module.exports = grammar({
 
     _unique_constraint_attribute: $ => $._attribute,
 
-    // TODO: varid allows unicode. Should constraint name allow it too?
-    _constraint_name: $ => $._varid,
+    _sql_constraint_name: _ => /[a-z][\w]+/,
 
-    _foreign_constraint: $ => seq(
+    foreign_constraint: $ => seq(
       'Foreign',
       $._entity_name,
       optional($._cascade_actions),
-      $._constraint_name,
+      $._sql_constraint_name,
       repeat1($._field_name),
       optional(seq(
         'References',
