@@ -1,5 +1,6 @@
 {
   "name": "haskell_persistent",
+  "word": "_varid",
   "rules": {
     "quasi_quotation": {
       "type": "REPEAT",
@@ -119,7 +120,7 @@
             "members": [
               {
                 "type": "STRING",
-                "value": "--"
+                "value": "-- "
               },
               {
                 "type": "PATTERN",
@@ -146,26 +147,6 @@
         }
       ]
     },
-    "comma": {
-      "type": "STRING",
-      "value": ","
-    },
-    "_dot": {
-      "type": "STRING",
-      "value": "."
-    },
-    "_varsym": {
-      "type": "PATTERN",
-      "value": "[!#$%&⋆+./<=>?@\\|^~:]+"
-    },
-    "_consym": {
-      "type": "PATTERN",
-      "value": ":[!#$%&⋆+./<=>?@\\|^~:-]+"
-    },
-    "_tyconsym": {
-      "type": "PATTERN",
-      "value": "[!#$%&⋆+./<=>?@\\|^~:-]+"
-    },
     "_entity_name": {
       "type": "SYMBOL",
       "name": "type_name"
@@ -177,6 +158,10 @@
     "_haskell_constraint_name": {
       "type": "SYMBOL",
       "name": "constructor"
+    },
+    "_persistent_type": {
+      "type": "SYMBOL",
+      "name": "_atype"
     },
     "_entity_header": {
       "type": "SEQ",
@@ -269,15 +254,20 @@
           "name": "type",
           "content": {
             "type": "SYMBOL",
-            "name": "_type"
+            "name": "_persistent_type"
           }
         },
         {
-          "type": "REPEAT",
+          "type": "ALIAS",
           "content": {
-            "type": "SYMBOL",
-            "name": "_key_attribute"
-          }
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_key_attribute"
+            }
+          },
+          "named": true,
+          "value": "attributes"
         }
       ]
     },
@@ -296,29 +286,120 @@
           }
         },
         {
-          "type": "REPEAT",
+          "type": "ALIAS",
           "content": {
-            "type": "SYMBOL",
-            "name": "_key_attribute"
-          }
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_key_attribute"
+            }
+          },
+          "named": true,
+          "value": "attributes"
         }
       ]
     },
     "_key_attribute": {
       "type": "SYMBOL",
-      "name": "_attribute"
+      "name": "_field_attribute"
     },
     "_entity_attribute": {
-      "type": "SYMBOL",
-      "name": "_attribute"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "key_value_attribute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "exl_mark_attribute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "other_attribute"
+        }
+      ]
     },
     "_field_attribute": {
-      "type": "SYMBOL",
-      "name": "_attribute"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "key_value_attribute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "exl_mark_attribute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "other_attribute"
+        }
+      ]
     },
-    "_attribute": {
-      "type": "STRING",
-      "value": "default=uuid_generate_v1mc()"
+    "key_value_attribute": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "PATTERN",
+            "value": "\\w+"
+          },
+          "named": true,
+          "value": "name"
+        },
+        {
+          "type": "STRING",
+          "value": "="
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_key_value_attribute_value"
+        }
+      ]
+    },
+    "_key_value_attribute_value": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_key_value_atribute_value_literal"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_key_value_atribute_value_other_token"
+        }
+      ]
+    },
+    "_key_value_atribute_value_literal": {
+      "type": "PREC",
+      "value": 1,
+      "content": {
+        "type": "SYMBOL",
+        "name": "_literal"
+      }
+    },
+    "_key_value_atribute_value_other_token": {
+      "type": "PREC",
+      "value": 0,
+      "content": {
+        "type": "ALIAS",
+        "content": {
+          "type": "PATTERN",
+          "value": "\\w[\\w\\(\\)\\[\\]]+"
+        },
+        "named": true,
+        "value": "string"
+      }
+    },
+    "exl_mark_attribute": {
+      "type": "PATTERN",
+      "value": "!\\w+"
+    },
+    "other_attribute": {
+      "type": "PATTERN",
+      "value": "\\w+"
     },
     "field_definition": {
       "type": "SEQ",
@@ -348,15 +429,20 @@
           "name": "type",
           "content": {
             "type": "SYMBOL",
-            "name": "_type"
+            "name": "_persistent_type"
           }
         },
         {
-          "type": "REPEAT",
+          "type": "ALIAS",
           "content": {
-            "type": "SYMBOL",
-            "name": "_field_attribute"
-          }
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_field_attribute"
+            }
+          },
+          "named": true,
+          "value": "attributes"
         }
       ]
     },
@@ -364,16 +450,9 @@
       "type": "PATTERN",
       "value": "[~!]"
     },
-    "_cascade_action": {
+    "cascade_action": {
       "type": "PATTERN",
-      "value": "OnDelete\\w+|OnUpdate\\w+"
-    },
-    "_cascade_actions": {
-      "type": "REPEAT1",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_cascade_action"
-      }
+      "value": "(OnDelete|OnUpdate)(Cascade|Restrict|SetNull|SetDefault)"
     },
     "unique_constraint": {
       "type": "SEQ",
@@ -390,17 +469,31 @@
           }
         },
         {
-          "type": "REPEAT",
+          "type": "ALIAS",
           "content": {
-            "type": "SYMBOL",
-            "name": "_unique_constraint_attribute"
-          }
+            "type": "REPEAT",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_unique_constraint_attribute"
+            }
+          },
+          "named": true,
+          "value": "attributes"
         }
       ]
     },
     "_unique_constraint_attribute": {
-      "type": "SYMBOL",
-      "name": "_attribute"
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "exl_mark_attribute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "key_value_attribute"
+        }
+      ]
     },
     "_sql_constraint_name": {
       "type": "PATTERN",
@@ -418,16 +511,11 @@
           "name": "_entity_name"
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "_cascade_actions"
-            },
-            {
-              "type": "BLANK"
-            }
-          ]
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "cascade_action"
+          }
         },
         {
           "type": "SYMBOL",
@@ -466,15 +554,6 @@
         }
       ]
     },
-    "_class_name": {
-      "type": "ALIAS",
-      "content": {
-        "type": "SYMBOL",
-        "name": "_conid"
-      },
-      "named": true,
-      "value": "type"
-    },
     "entity_derives": {
       "type": "SEQ",
       "members": [
@@ -485,11 +564,35 @@
         {
           "type": "REPEAT1",
           "content": {
-            "type": "SYMBOL",
-            "name": "_class_name"
+            "type": "FIELD",
+            "name": "class",
+            "content": {
+              "type": "SYMBOL",
+              "name": "_qtyconid"
+            }
           }
         }
       ]
+    },
+    "comma": {
+      "type": "STRING",
+      "value": ","
+    },
+    "_dot": {
+      "type": "STRING",
+      "value": "."
+    },
+    "_varsym": {
+      "type": "PATTERN",
+      "value": "[!#$%&⋆+./<=>?@\\|^~:]+"
+    },
+    "_consym": {
+      "type": "PATTERN",
+      "value": ":[!#$%&⋆+./<=>?@\\|^~:-]+"
+    },
+    "_tyconsym": {
+      "type": "PATTERN",
+      "value": "[!#$%&⋆+./<=>?@\\|^~:-]+"
     },
     "float": {
       "type": "TOKEN",

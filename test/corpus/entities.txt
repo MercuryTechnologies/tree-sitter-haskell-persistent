@@ -33,6 +33,27 @@ Person
           (type))))))
 
 ================================================================================
+Entity with comments
+================================================================================
+
+-- | comment
+Person  -- | comment
+--  comment
+  name Text -- comment
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type))))))
+
+================================================================================
 Entity with deriving classes
 ================================================================================
 
@@ -185,4 +206,101 @@ Person
     (entity_body
       (surrogate_key
         (type_name
-          (type))))))
+          (type))
+        (attributes
+          (key_value_attribute
+            (name)
+            (string)))))))
+
+================================================================================
+Entity with field attributes
+================================================================================
+
+Person
+  name Text Maybe default="Unknown" maxlen=50 !attr MigrationOnly
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type))
+        (attributes
+          (other_attribute)
+          (key_value_attribute
+            (name)
+            (string))
+          (key_value_attribute
+            (name)
+            (string))
+          (exl_mark_attribute)
+          (other_attribute))))))
+
+================================================================================
+Entity with unique constraint
+================================================================================
+
+Person
+  name Text
+  email Text
+  UniqueEmail email sql=email_id_key
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (unique_constraint
+        (constructor)
+        (variable)
+        (attributes
+          (key_value_attribute
+            (name)
+            (string)))))))
+
+================================================================================
+Entity with foreign constraint
+================================================================================
+
+Person
+  name Text
+  email Text
+  UniqueEmail email sql=email_id_key
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (unique_constraint
+        (constructor)
+        (variable)
+        (attributes
+          (key_value_attribute
+            (name)
+            (string)))))))

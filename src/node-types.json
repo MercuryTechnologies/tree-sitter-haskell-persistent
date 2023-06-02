@@ -74,6 +74,29 @@
     }
   },
   {
+    "type": "attributes",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "exl_mark_attribute",
+          "named": true
+        },
+        {
+          "type": "key_value_attribute",
+          "named": true
+        },
+        {
+          "type": "other_attribute",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "class_name",
     "named": true,
     "fields": {},
@@ -348,7 +371,19 @@
           "named": true
         },
         {
+          "type": "exl_mark_attribute",
+          "named": true
+        },
+        {
           "type": "is_sum_marker",
+          "named": true
+        },
+        {
+          "type": "key_value_attribute",
+          "named": true
+        },
+        {
+          "type": "other_attribute",
           "named": true
         }
       ]
@@ -357,16 +392,21 @@
   {
     "type": "entity_derives",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "type",
-          "named": true
-        }
-      ]
+    "fields": {
+      "class": {
+        "multiple": true,
+        "required": true,
+        "types": [
+          {
+            "type": "qualified_type",
+            "named": true
+          },
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -497,27 +537,7 @@
         "required": true,
         "types": [
           {
-            "type": "context",
-            "named": true
-          },
-          {
-            "type": "forall",
-            "named": true
-          },
-          {
-            "type": "fun",
-            "named": true
-          },
-          {
             "type": "promoted",
-            "named": true
-          },
-          {
-            "type": "type_apply",
-            "named": true
-          },
-          {
-            "type": "type_infix",
             "named": true
           },
           {
@@ -546,6 +566,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "attributes",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -623,6 +653,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "cascade_action",
+          "named": true
+        },
         {
           "type": "type_name",
           "named": true
@@ -939,6 +973,37 @@
     "fields": {}
   },
   {
+    "type": "key_value_attribute",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "char",
+          "named": true
+        },
+        {
+          "type": "float",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "name",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "kind",
     "named": true,
     "fields": {
@@ -1060,6 +1125,10 @@
       "required": true,
       "types": [
         {
+          "type": "attributes",
+          "named": true
+        },
+        {
           "type": "variable",
           "named": true
         }
@@ -1068,6 +1137,11 @@
   },
   {
     "type": "operator",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "other_attribute",
     "named": true,
     "fields": {}
   },
@@ -1414,27 +1488,7 @@
         "required": true,
         "types": [
           {
-            "type": "context",
-            "named": true
-          },
-          {
-            "type": "forall",
-            "named": true
-          },
-          {
-            "type": "fun",
-            "named": true
-          },
-          {
             "type": "promoted",
-            "named": true
-          },
-          {
-            "type": "type_apply",
-            "named": true
-          },
-          {
-            "type": "type_infix",
             "named": true
           },
           {
@@ -1463,6 +1517,16 @@
           }
         ]
       }
+    },
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "attributes",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -2081,6 +2145,10 @@
       "required": true,
       "types": [
         {
+          "type": "attributes",
+          "named": true
+        },
+        {
           "type": "constructor",
           "named": true
         },
@@ -2212,6 +2280,10 @@
     "named": false
   },
   {
+    "type": "cascade_action",
+    "named": true
+  },
+  {
     "type": "char",
     "named": true
   },
@@ -2222,6 +2294,10 @@
   {
     "type": "deriving",
     "named": false
+  },
+  {
+    "type": "exl_mark_attribute",
+    "named": true
   },
   {
     "type": "float",
@@ -2258,6 +2334,10 @@
   {
     "type": "module",
     "named": false
+  },
+  {
+    "type": "name",
+    "named": true
   },
   {
     "type": "nominal",

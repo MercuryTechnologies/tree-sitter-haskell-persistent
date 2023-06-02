@@ -132,6 +132,8 @@ module.exports = grammar({
 
   ],
   
+  word: $ => $._varid,
+
   // Parsing type names and field names is based on tree-sitter-haskell, the rest is based on the parsing from Database.Persist.Quasi.Internal
   rules: {
     quasi_quotation: $ => repeat($.entity_definition),
@@ -162,20 +164,16 @@ module.exports = grammar({
       token(seq('#', /.*/)),
     ),
 
-    // Extra definitions that the haskell grammar depends on. In tree-sitter-haskell they are external and are defined in scanner.c.
-    comma: _ => ',',
-    _dot: _ => '.',
-    // See https://www.haskell.org/onlinereport/haskell2010/haskellch2.html#x7-180002.4. The definitions below ignore the reserved operators for simplicity.
-    _varsym: _ => /[!#$%&⋆+./<=>?@\|^~:]+/,
-    _consym: _ => /:[!#$%&⋆+./<=>?@\|^~:-]+/,
-    _tyconsym: _ => /[!#$%&⋆+./<=>?@\|^~:-]+/,
-    
     _entity_name: $ => $.type_name,
 
     _field_name: $ => $.variable,
 
     _haskell_constraint_name: $ => $.constructor,
 
+    // The attributes may follow the type. The _atype, as opposed to _type, ensures that attributes would not be mistaken for other types that are applied to the actual type.
+    // For example, "name Text Maybe" should be parsed as (with concise imaginary syntax) "name :: Text, has attribute Maybe", not "name :: Text Maybe".
+    _persistent_type: $ => $._atype,
+    
     _entity_header: $ => seq(
       optional($.is_sum_marker),
       field('name', $._entity_name),
@@ -200,53 +198,78 @@ module.exports = grammar({
 
     surrogate_key: $ => seq(
       'Id',
-      field('type', $._type),
-      repeat($._key_attribute)
+      field('type', $._persistent_type),
+      alias(repeat($._key_attribute), $.attributes)
     ),
 
     natural_key: $ => seq(
       'Primary',
       repeat1($._field_name),
-      repeat($._key_attribute)
+      alias(repeat($._key_attribute), $.attributes)
     ),
 
-    _key_attribute: $ => $._attribute,
+    _key_attribute: $ => $._field_attribute,
 
-    _entity_attribute: $ => $._attribute,
+    _entity_attribute: $ => choice(
+      $.key_value_attribute,
+      $.exl_mark_attribute,
+      $.other_attribute     
+    ),
 
-    _field_attribute: $ => $._attribute,
+    _field_attribute: $ => choice(
+      $.key_value_attribute,
+      $.exl_mark_attribute,
+      $.other_attribute     
+    ),
 
-    // TODO: see tokenize in Database.Persist.Quasi.Internal
-    _attribute: _ => 'default=uuid_generate_v1mc()',
+    key_value_attribute: $ => seq(
+      alias(/\w+/, $.name),
+      '=',
+      $._key_value_attribute_value
+    ),
 
+    _key_value_attribute_value: $ => choice(
+      $._key_value_atribute_value_literal,
+      $._key_value_atribute_value_other_token
+    ),
+    // TODO: maxlen=50 gets parsed as a string. The $._literal does not parse it
+    _key_value_atribute_value_literal: $ => prec(1, $._literal),
+    _key_value_atribute_value_other_token: $ => prec(0, alias(/\w[\w\(\)\[\]]+/, $.string)),
+
+    exl_mark_attribute: _ => /!\w+/,
+
+    // Maybe, MigrationOnly, noreference, and others
+    other_attribute: _ => /\w+/,  
+    
     field_definition: $ => seq(
       optional($._field_strictness_prefix),
       field('name', $._field_name),
-      field('type', $._type),
-      repeat($._field_attribute)
+      field('type', $._persistent_type),
+      alias(repeat($._field_attribute), $.attributes)
     ),
 
     _field_strictness_prefix: _ => /[~!]/,
 
-    _cascade_action: _ => /OnDelete\w+|OnUpdate\w+/,
-
-    _cascade_actions: $ => repeat1($._cascade_action),
+    cascade_action: _ => /(OnDelete|OnUpdate)(Cascade|Restrict|SetNull|SetDefault)/,
 
     // Persistent has yet one more style of unique declaration that starts with a whole word "Unique". It has no examples or tests, and github code search finds no examples of it either.
     unique_constraint: $ => seq(
       $._haskell_constraint_name,
       repeat1($._field_name),
-      repeat($._unique_constraint_attribute)
+      alias(repeat($._unique_constraint_attribute), $.attributes)
     ),
 
-    _unique_constraint_attribute: $ => $._attribute,
+    _unique_constraint_attribute: $ => choice(
+      $.exl_mark_attribute,
+      $.key_value_attribute
+    ),
 
     _sql_constraint_name: _ => /[a-z][\w]+/,
 
     foreign_constraint: $ => seq(
       'Foreign',
       $._entity_name,
-      optional($._cascade_actions),
+      repeat($.cascade_action),
       $._sql_constraint_name,
       repeat1($._field_name),
       optional(seq(
@@ -255,13 +278,20 @@ module.exports = grammar({
       ))
     ),
 
-    _class_name: $ => alias($._conid, $.type),
-
+    // See deriving in tree-sitter-haskell/grammar/data.js for the complete syntax. Persistent only supports a list of class names
     entity_derives: $ => seq(
       'deriving',
-      repeat1($._class_name)
+      repeat1(field('class', $._qtyconid))
     ),
 
+    // Extra definitions that the haskell grammar depends on. In tree-sitter-haskell they are external and are defined in scanner.c.
+    comma: _ => ',',
+    _dot: _ => '.',
+    // See https://www.haskell.org/onlinereport/haskell2010/haskellch2.html#x7-180002.4. The definitions below ignore the reserved operators for simplicity.
+    _varsym: _ => /[!#$%&⋆+./<=>?@\|^~:]+/,
+    _consym: _ => /:[!#$%&⋆+./<=>?@\|^~:-]+/,
+    _tyconsym: _ => /[!#$%&⋆+./<=>?@\|^~:-]+/,
+    
     ...basic,
     ...id,
     ...import_,
