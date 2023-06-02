@@ -21,9 +21,6 @@ module.exports = grammar({
     $._newline,
     $._indent,
     $._dedent,
-    $._string_start,
-    $._string_content,
-    $._string_end,
   ],
 
   precedences: _ => [
