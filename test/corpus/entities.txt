@@ -112,3 +112,39 @@ Person
         (type_tuple
           (type_name)
           (type_name))))))
+
+================================================================================
+Entity with ticked type
+================================================================================
+
+CustomerTransfer
+    customerId CustomerId
+    moneyAmount (MoneyAmount 'Customer 'Debit)
+    currencyCode CurrencyCode
+    uuid TransferUuid
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name)
+    (entity_body
+      (field_definition
+        (variable)
+        (type_tuple
+          (type_name)
+          (type_name))))))
+          
+================================================================================
+Entity with custom id column
+================================================================================
+
+Person
+  Id UUID default=uuid_generate_v1mc()
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (comment)
+  (entity_definition
+    (type_name)))

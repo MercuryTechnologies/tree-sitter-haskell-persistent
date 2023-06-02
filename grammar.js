@@ -1,3 +1,9 @@
+const basic = require('./grammar/basic.js')
+const id = require('./grammar/id.js')
+const import_ = require('./grammar/import.js')
+const module_ = require('./grammar/module.js')
+const type = require('./grammar/type.js')
+
 module.exports = grammar({
   name: 'haskell_persistent',
 
@@ -58,6 +64,8 @@ module.exports = grammar({
       token(seq('#', /.*/)),
     ),
 
+    comma: _ => ',',
+    
     _entity_name: $ => $.type_name,
 
     _field_name: $ => $.variable,
@@ -116,19 +124,6 @@ module.exports = grammar({
 
     _field_strictness_prefix: _ => /[~!]/,
 
-    _type: $ => choice(
-      $.type_name,
-      $.type_list,
-      $.type_tuple
-    ),
-
-    // Only type constructors. Persistent doesn't have type variables.
-    type_name: $ => $._conid,
-
-    type_list: $ => seq('[', $._type, ']'),
-
-    type_tuple: $ => seq('(', $._type, repeat1(seq(',', $._type)), ')'),
-
     _cascade_action: _ => /OnDelete\w+|OnUpdate\w+/,
 
     _cascade_actions: $ => repeat1($._cascade_action),
@@ -162,6 +157,12 @@ module.exports = grammar({
     entity_derives: $ => seq(
       'deriving',
       repeat1($._class_name)
-    )
+    ),
+
+    ...basic,
+    ...id,
+    ...import_,
+    ...module_,
+    ...type
   }
 });
