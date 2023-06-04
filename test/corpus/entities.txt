@@ -321,7 +321,7 @@ Person
           (key_value_attribute
             (name)
             (number))
-          (exl_mark_attribute)
+          (exclamation_mark_attribute)
           (other_attribute))))))
 
 ================================================================================
@@ -366,7 +366,8 @@ User
     emailFirstPart  Text
     emailSecondPart Text
 
-    Foreign Email fk_user_email emailFirstPart emailSecondPart
+    Foreign Email fk_user_email emailFirstPart emailSecondPart !someattr
+
 --------------------------------------------------------------------------------
 
 (quasi_quotation
@@ -392,7 +393,9 @@ User
         (sql_constraint_name)
         (fields
           (variable)
-          (variable))))))
+          (variable))
+        (attributes
+          (exclamation_mark_attribute))))))
 
 ================================================================================
 Entity with foreign constraint, cascade

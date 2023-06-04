@@ -82,7 +82,7 @@
       "required": false,
       "types": [
         {
-          "type": "exl_mark_attribute",
+          "type": "exclamation_mark_attribute",
           "named": true
         },
         {
@@ -366,7 +366,7 @@
           "named": true
         },
         {
-          "type": "exl_mark_attribute",
+          "type": "exclamation_mark_attribute",
           "named": true
         },
         {
@@ -663,6 +663,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "attributes",
+          "named": true
+        },
         {
           "type": "cascade_action",
           "named": true
@@ -1135,9 +1139,13 @@
     "named": true,
     "fields": {},
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "attributes",
+          "named": true
+        },
         {
           "type": "fields",
           "named": true
@@ -1539,7 +1547,7 @@
       }
     },
     "children": {
-      "multiple": false,
+      "multiple": true,
       "required": false,
       "types": [
         {
@@ -2320,7 +2328,7 @@
     "named": false
   },
   {
-    "type": "exl_mark_attribute",
+    "type": "exclamation_mark_attribute",
     "named": true
   },
   {

@@ -197,29 +197,35 @@ module.exports = grammar({
     surrogate_key: $ => seq(
       'Id',
       field('type', $._persistent_type),
-      alias(repeat($._key_attribute), $.attributes)
+      optional($._list_of_attributes_start_with_no_other)
     ),
 
     natural_key: $ => seq(
       'Primary',
       $._list_of_fields,
-      // alias(repeat($._key_attribute), $.attributes)
+      optional($._list_of_attributes_start_with_no_other)
     ),
-
-    _key_attribute: $ => $._field_attribute,
 
     _list_of_fields: $ => alias(repeat1($._field_name), $.fields),
 
-    _entity_attribute: $ => choice(
+    _entity_attribute: $ => $._attribute,
+
+    _field_attribute: $ => $._attribute,
+
+    _attribute: $ => choice(
       $.key_value_attribute,
-      $.exl_mark_attribute,
+      $.exclamation_mark_attribute,
       $.other_attribute     
     ),
 
-    _field_attribute: $ => choice(
+    _attribute_no_other: $ => choice(
       $.key_value_attribute,
-      $.exl_mark_attribute,
-      $.other_attribute     
+      $.exclamation_mark_attribute
+    ),
+
+    _list_of_attributes_start_with_no_other: $ => alias(
+      seq($._attribute_no_other, repeat($._attribute)),
+      $.attributes
     ),
 
     key_value_attribute: $ => seq(
@@ -227,7 +233,7 @@ module.exports = grammar({
       $._key_value_attribute_value
     ),
 
-    // Parse key name with "=" as a single token to avoid ambiguity between an attribute key and a field name. There must be a cleaner way - perhaps parse field name and attribue key as the same token, so that the lexical precedence rule can resolve it.
+    // FIXME: Parse key name with "=" as a single token to avoid ambiguity between an attribute key and a field name. There must be a cleaner way - perhaps parse field name and attribue key as the same token, so that the lexical precedence rule can resolve it.
     _key_value_attribute_key: $ => alias(/\w+=/, $.name),
 
     _key_value_attribute_value: $ => choice(
@@ -242,7 +248,7 @@ module.exports = grammar({
       )
     ),
 
-    exl_mark_attribute: _ => /!\w+/,
+    exclamation_mark_attribute: _ => /!\w+/,
 
     // Maybe, MigrationOnly, noreference, and others
     other_attribute: _ => /\w+/,  
@@ -262,11 +268,11 @@ module.exports = grammar({
     unique_constraint: $ => seq(
       $._haskell_constraint_name,
       $._list_of_fields,
-      alias(repeat($._unique_constraint_attribute), $.attributes)
+      optional($._list_of_attributes_start_with_no_other)
     ),
 
     _unique_constraint_attribute: $ => choice(
-      $.exl_mark_attribute,
+      $.exclamation_mark_attribute,
       $.key_value_attribute
     ),
 
@@ -283,7 +289,8 @@ module.exports = grammar({
           'References',
           alias($._list_of_fields, $.references)
         )
-      )
+      ),
+      optional($._list_of_attributes_start_with_no_other)
     ),
 
     // See deriving in tree-sitter-haskell/grammar/data.js for the complete syntax. Persistent only supports a list of class names
