@@ -285,17 +285,8 @@
       "type": "SEQ",
       "members": [
         {
-          "type": "ALIAS",
-          "content": {
-            "type": "PATTERN",
-            "value": "\\w+"
-          },
-          "named": true,
-          "value": "name"
-        },
-        {
-          "type": "STRING",
-          "value": "="
+          "type": "SYMBOL",
+          "name": "_key_value_attribute_key"
         },
         {
           "type": "SYMBOL",
@@ -303,39 +294,55 @@
         }
       ]
     },
+    "_key_value_attribute_key": {
+      "type": "ALIAS",
+      "content": {
+        "type": "PATTERN",
+        "value": "\\w+="
+      },
+      "named": true,
+      "value": "name"
+    },
     "_key_value_attribute_value": {
       "type": "CHOICE",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_key_value_atribute_value_literal"
+          "name": "_stringly"
         },
         {
-          "type": "SYMBOL",
-          "name": "_key_value_atribute_value_other_token"
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": "attribute-value-number-literal",
+              "content": {
+                "type": "PATTERN",
+                "value": "[0-9][0-9_]*"
+              }
+            }
+          },
+          "named": true,
+          "value": "number"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": "attribute-value-no-quotes-string",
+              "content": {
+                "type": "PATTERN",
+                "value": "\\w[\\w\\(\\)\\[\\]]+"
+              }
+            }
+          },
+          "named": true,
+          "value": "string"
         }
       ]
-    },
-    "_key_value_atribute_value_literal": {
-      "type": "PREC",
-      "value": 1,
-      "content": {
-        "type": "SYMBOL",
-        "name": "_literal"
-      }
-    },
-    "_key_value_atribute_value_other_token": {
-      "type": "PREC",
-      "value": 0,
-      "content": {
-        "type": "ALIAS",
-        "content": {
-          "type": "PATTERN",
-          "value": "\\w[\\w\\(\\)\\[\\]]+"
-        },
-        "named": true,
-        "value": "string"
-      }
     },
     "exl_mark_attribute": {
       "type": "PATTERN",
@@ -3790,6 +3797,16 @@
       {
         "type": "STRING",
         "value": "type"
+      }
+    ],
+    [
+      {
+        "type": "STRING",
+        "value": "attribute-value-number-literal"
+      },
+      {
+        "type": "STRING",
+        "value": "attribute-value-no-quotes-string"
       }
     ]
   ],

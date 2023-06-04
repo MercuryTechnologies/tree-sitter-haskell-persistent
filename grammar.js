@@ -36,6 +36,10 @@ module.exports = grammar({
       'function-type',
       'type',
     ],
+    [
+      'attribute-value-number-literal',
+      'attribute-value-no-quotes-string'
+    ]
   ],
 
   inline: $ => [
@@ -219,18 +223,24 @@ module.exports = grammar({
     ),
 
     key_value_attribute: $ => seq(
-      alias(/\w+/, $.name),
-      '=',
+      $._key_value_attribute_key,
       $._key_value_attribute_value
     ),
 
+    // Parse key name with "=" as a single token to avoid ambiguity between an attribute key and a field name. There must be a cleaner way - perhaps parse field name and attribue key as the same token, so that the lexical precedence rule can resolve it.
+    _key_value_attribute_key: $ => alias(/\w+=/, $.name),
+
     _key_value_attribute_value: $ => choice(
-      $._key_value_atribute_value_literal,
-      $._key_value_atribute_value_other_token
+      $._stringly,
+      alias(
+        token(prec('attribute-value-number-literal', /[0-9][0-9_]*/)),
+        $.number
+      ),
+      alias(
+        token(prec('attribute-value-no-quotes-string', /\w[\w\(\)\[\]]+/)),
+        $.string
+      )
     ),
-    // TODO: maxlen=50 gets parsed as a string. The $._literal does not parse it
-    _key_value_atribute_value_literal: $ => prec(1, $._literal),
-    _key_value_atribute_value_other_token: $ => prec(0, alias(/\w[\w\(\)\[\]]+/, $.string)),
 
     exl_mark_attribute: _ => /!\w+/,
 

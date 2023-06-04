@@ -1003,15 +1003,11 @@
           "named": true
         },
         {
-          "type": "float",
-          "named": true
-        },
-        {
-          "type": "integer",
-          "named": true
-        },
-        {
           "type": "name",
+          "named": true
+        },
+        {
+          "type": "number",
           "named": true
         },
         {
@@ -1151,11 +1147,6 @@
   },
   {
     "type": "operator",
-    "named": true,
-    "fields": {}
-  },
-  {
-    "type": "other_attribute",
     "named": true,
     "fields": {}
   },
@@ -2375,6 +2366,14 @@
   {
     "type": "nominal",
     "named": false
+  },
+  {
+    "type": "number",
+    "named": true
+  },
+  {
+    "type": "other_attribute",
+    "named": true
   },
   {
     "type": "pattern",

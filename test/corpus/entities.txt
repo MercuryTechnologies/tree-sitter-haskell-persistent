@@ -320,7 +320,7 @@ Person
             (string))
           (key_value_attribute
             (name)
-            (string))
+            (number))
           (exl_mark_attribute)
           (other_attribute))))))
 
