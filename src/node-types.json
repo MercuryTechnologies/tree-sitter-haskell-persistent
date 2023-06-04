@@ -316,7 +316,7 @@
       "required": true,
       "types": [
         {
-          "type": "entity_derives",
+          "type": "entity_deriving",
           "named": true
         },
         {
@@ -385,7 +385,7 @@
     }
   },
   {
-    "type": "entity_derives",
+    "type": "entity_deriving",
     "named": true,
     "fields": {
       "class": {

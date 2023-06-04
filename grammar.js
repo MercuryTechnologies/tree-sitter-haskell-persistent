@@ -135,7 +135,7 @@ module.exports = grammar({
     [$.annotated_type_variable, $.type_name],
 
   ],
-  
+
   word: $ => $._varid,
 
   // Parsing type names and field names is based on tree-sitter-haskell, the rest is based on the parsing from Database.Persist.Quasi.Internal
@@ -147,21 +147,12 @@ module.exports = grammar({
       optional(seq($._indent, $.entity_body, $._dedent))
     ),
 
-    entity_body: $ => choice(
-      seq(
-        repeat1($._entity_line_definition),
-        repeat($.entity_derives),
-      ),
-      seq(
-        repeat($._entity_line_definition),
-        repeat1($.entity_derives),
-      ),
-    ),
+    entity_body: $ => repeat1($._entity_line_definition),
 
     is_sum_marker: _ => '+',
 
     comment: _ => /(#|--).*/,
-    
+
     _entity_name: $ => $.type_name,
 
     _field_name: $ => $.variable,
@@ -171,7 +162,7 @@ module.exports = grammar({
     // The attributes may follow the type. The _atype, as opposed to _type, ensures that attributes would not be mistaken for other types that are applied to the actual type.
     // For example, "name Text Maybe" should be parsed as (with concise imaginary syntax) "name :: Text, has attribute Maybe", not "name :: Text Maybe".
     _persistent_type: $ => $._atype,
-    
+
     _entity_header: $ => seq(
       optional($.is_sum_marker),
       field('name', $._entity_name),
@@ -185,6 +176,7 @@ module.exports = grammar({
         $.field_definition,
         $.unique_constraint,
         $.foreign_constraint,
+        $.entity_deriving
       ),
       $._newline
     ),
@@ -215,7 +207,7 @@ module.exports = grammar({
     _attribute: $ => choice(
       $.key_value_attribute,
       $.exclamation_mark_attribute,
-      $.other_attribute     
+      $.other_attribute
     ),
 
     _attribute_no_other: $ => choice(
@@ -243,16 +235,16 @@ module.exports = grammar({
         $.number
       ),
       alias(
-        token(prec('attribute-value-no-quotes-string', /\w[\w\(\)\[\]]+/)),
+        token(prec('attribute-value-no-quotes-string', /[^\s]+/)),
         $.string
       )
     ),
 
-    exclamation_mark_attribute: _ => /!\w+/,
+    exclamation_mark_attribute: _ => /![\w-]+/,
 
     // Maybe, MigrationOnly, noreference, and others
-    other_attribute: _ => /\w+/,  
-    
+    other_attribute: _ => /[\w@]+/,
+
     field_definition: $ => seq(
       optional($._field_strictness_prefix),
       field('name', $._field_name),
@@ -294,7 +286,7 @@ module.exports = grammar({
     ),
 
     // See deriving in tree-sitter-haskell/grammar/data.js for the complete syntax. Persistent only supports a list of class names
-    entity_derives: $ => seq(
+    entity_deriving: $ => seq(
       'deriving',
       repeat1(field('class', $._qtyconid))
     ),
@@ -306,7 +298,7 @@ module.exports = grammar({
     _varsym: _ => /[!#$%&⋆+./<=>?@\|^~:]+/,
     _consym: _ => /:[!#$%&⋆+./<=>?@\|^~:-]+/,
     _tyconsym: _ => /[!#$%&⋆+./<=>?@\|^~:-]+/,
-    
+
     ...basic,
     ...id,
     ...import_,

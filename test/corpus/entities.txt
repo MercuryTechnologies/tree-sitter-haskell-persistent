@@ -12,6 +12,24 @@ Person
       (type))))
 
 ================================================================================
+Various attribute shapes
+================================================================================
+
+Person @MigrationOnly !no-migrate a=b
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (other_attribute)
+    (exclamation_mark_attribute)
+    (key_value_attribute
+      (name)
+      (string))))
+
+================================================================================
 Entity with one field
 ================================================================================
 
@@ -126,9 +144,9 @@ Person
         (variable)
         (type_name
           (type)))
-      (entity_derives
+      (entity_deriving
         (type))
-      (entity_derives
+      (entity_deriving
         (type)
         (type)))))
 
@@ -200,6 +218,30 @@ Person
           (comma)
           (type_name
             (type)))))))
+
+================================================================================
+Entity with field type with type application
+================================================================================
+
+Person
+  details (JSONB [Details])
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_parens
+          (type_apply
+            (type_name
+              (type))
+            (type_list
+              (type_name
+                (type)))))))))
 
 ================================================================================
 Entity with ticked type
@@ -323,6 +365,65 @@ Person
             (number))
           (exclamation_mark_attribute)
           (other_attribute))))))
+
+================================================================================
+Entity with field attribute with special characters
+================================================================================
+
+Person
+  details Details default='[]'::jsonb
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type))
+        (attributes
+          (key_value_attribute
+            (name)
+            (string)))))))
+
+================================================================================
+Entity with deriving clause in the middle
+================================================================================
+
+Person
+  name Text
+  email Text
+  deriving Eq
+  UniqueEmail email sql=email_id_key
+
+--------------------------------------------------------------------------------
+
+(quasi_quotation
+  (entity_definition
+    (type_name
+      (type))
+    (entity_body
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (field_definition
+        (variable)
+        (type_name
+          (type)))
+      (entity_deriving
+        (type))
+      (unique_constraint
+        (constructor)
+        (fields
+          (variable))
+        (attributes
+          (key_value_attribute
+            (name)
+            (string)))))))
 
 ================================================================================
 Entity with unique constraint

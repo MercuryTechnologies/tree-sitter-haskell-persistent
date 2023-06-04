@@ -44,47 +44,11 @@
       ]
     },
     "entity_body": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_entity_line_definition"
-              }
-            },
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "entity_derives"
-              }
-            }
-          ]
-        },
-        {
-          "type": "SEQ",
-          "members": [
-            {
-              "type": "REPEAT",
-              "content": {
-                "type": "SYMBOL",
-                "name": "_entity_line_definition"
-              }
-            },
-            {
-              "type": "REPEAT1",
-              "content": {
-                "type": "SYMBOL",
-                "name": "entity_derives"
-              }
-            }
-          ]
-        }
-      ]
+      "type": "REPEAT1",
+      "content": {
+        "type": "SYMBOL",
+        "name": "_entity_line_definition"
+      }
     },
     "is_sum_marker": {
       "type": "STRING",
@@ -167,6 +131,10 @@
             {
               "type": "SYMBOL",
               "name": "foreign_constraint"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "entity_deriving"
             }
           ]
         },
@@ -368,7 +336,7 @@
               "value": "attribute-value-no-quotes-string",
               "content": {
                 "type": "PATTERN",
-                "value": "\\w[\\w\\(\\)\\[\\]]+"
+                "value": "[^\\s]+"
               }
             }
           },
@@ -379,11 +347,11 @@
     },
     "exclamation_mark_attribute": {
       "type": "PATTERN",
-      "value": "!\\w+"
+      "value": "![\\w-]+"
     },
     "other_attribute": {
       "type": "PATTERN",
-      "value": "\\w+"
+      "value": "[\\w@]+"
     },
     "field_definition": {
       "type": "SEQ",
@@ -546,7 +514,7 @@
         }
       ]
     },
-    "entity_derives": {
+    "entity_deriving": {
       "type": "SEQ",
       "members": [
         {
