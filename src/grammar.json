@@ -325,7 +325,58 @@
             }
           },
           "named": true,
-          "value": "number"
+          "value": "integer"
+        },
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": "attribute-value-number-literal",
+              "content": {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "PATTERN",
+                    "value": "[0-9][0-9_]*"
+                  },
+                  {
+                    "type": "CHOICE",
+                    "members": [
+                      {
+                        "type": "SEQ",
+                        "members": [
+                          {
+                            "type": "PATTERN",
+                            "value": "\\.[0-9_]+"
+                          },
+                          {
+                            "type": "CHOICE",
+                            "members": [
+                              {
+                                "type": "PATTERN",
+                                "value": "[eE][+-]?[0-9_]+"
+                              },
+                              {
+                                "type": "BLANK"
+                              }
+                            ]
+                          }
+                        ]
+                      },
+                      {
+                        "type": "PATTERN",
+                        "value": "[eE][+-]?[0-9_]+"
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "named": true,
+          "value": "float"
         },
         {
           "type": "ALIAS",

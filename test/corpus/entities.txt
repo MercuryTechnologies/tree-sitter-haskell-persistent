@@ -342,7 +342,7 @@ Entity with field attributes
 ================================================================================
 
 Person
-  name Text Maybe default="Unknown" maxlen=50 !attr MigrationOnly
+  name Text Maybe default="Unknown" maxlen=50 somefloat=1.2 anotherfloat=0.5e10 !attr MigrationOnly
 
 --------------------------------------------------------------------------------
 
@@ -362,7 +362,13 @@ Person
             (string))
           (key_value_attribute
             (name)
-            (number))
+            (integer))
+          (key_value_attribute
+            (name)
+            (float))
+          (key_value_attribute
+            (name)
+            (float))
           (exclamation_mark_attribute)
           (other_attribute))))))
 

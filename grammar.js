@@ -4,6 +4,9 @@ const import_ = require('./grammar/import.js')
 const module_ = require('./grammar/module.js')
 const type = require('./grammar/type.js')
 
+const decimal = /[0-9][0-9_]*/
+const exponent = /[eE][+-]?[0-9_]+/
+
 module.exports = grammar({
   name: 'haskell_persistent',
 
@@ -231,8 +234,18 @@ module.exports = grammar({
     _key_value_attribute_value: $ => choice(
       $._stringly,
       alias(
-        token(prec('attribute-value-number-literal', /[0-9][0-9_]*/)),
-        $.number
+        token(prec('attribute-value-number-literal', decimal)),
+        $.integer
+      ),
+      alias(
+        token(prec('attribute-value-number-literal', seq(
+          decimal,
+          choice(
+            seq(/\.[0-9_]+/, optional(exponent)),
+            exponent,
+          ),
+        ))),
+        $.float
       ),
       alias(
         token(prec('attribute-value-no-quotes-string', /[^\s]+/)),
