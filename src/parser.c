@@ -22,12 +22,12 @@ enum {
   sym_comment = 3,
   anon_sym_Id = 4,
   anon_sym_Primary = 5,
-  aux_sym__key_value_attribute_key_token1 = 6,
-  aux_sym__key_value_attribute_value_token1 = 7,
-  aux_sym__key_value_attribute_value_token2 = 8,
-  aux_sym__key_value_attribute_value_token3 = 9,
-  sym_exclamation_mark_attribute = 10,
-  sym_other_attribute = 11,
+  aux_sym__attribute_key_value_key_token1 = 6,
+  aux_sym__attribute_key_value_value_token1 = 7,
+  aux_sym__attribute_key_value_value_token2 = 8,
+  aux_sym__attribute_key_value_value_token3 = 9,
+  sym_attribute_exclamation_mark = 10,
+  sym_attribute_other = 11,
   sym__field_strictness_prefix = 12,
   sym_cascade_action = 13,
   sym_sql_constraint_name = 14,
@@ -108,9 +108,9 @@ enum {
   sym__attribute = 89,
   sym__attribute_no_other = 90,
   sym__list_of_attributes_start_with_no_other = 91,
-  sym_key_value_attribute = 92,
-  sym__key_value_attribute_key = 93,
-  sym__key_value_attribute_value = 94,
+  sym_attribute_key_value = 92,
+  sym__attribute_key_value_key = 93,
+  sym__attribute_key_value_value = 94,
   sym_field_definition = 95,
   sym_unique_constraint = 96,
   sym_foreign_constraint = 97,
@@ -208,12 +208,12 @@ static const char * const ts_symbol_names[] = {
   [sym_comment] = "comment",
   [anon_sym_Id] = "Id",
   [anon_sym_Primary] = "Primary",
-  [aux_sym__key_value_attribute_key_token1] = "name",
-  [aux_sym__key_value_attribute_value_token1] = "integer",
-  [aux_sym__key_value_attribute_value_token2] = "float",
-  [aux_sym__key_value_attribute_value_token3] = "string",
-  [sym_exclamation_mark_attribute] = "exclamation_mark_attribute",
-  [sym_other_attribute] = "other_attribute",
+  [aux_sym__attribute_key_value_key_token1] = "name",
+  [aux_sym__attribute_key_value_value_token1] = "integer",
+  [aux_sym__attribute_key_value_value_token2] = "float",
+  [aux_sym__attribute_key_value_value_token3] = "string",
+  [sym_attribute_exclamation_mark] = "attribute_exclamation_mark",
+  [sym_attribute_other] = "attribute_other",
   [sym__field_strictness_prefix] = "_field_strictness_prefix",
   [sym_cascade_action] = "cascade_action",
   [sym_sql_constraint_name] = "sql_constraint_name",
@@ -294,9 +294,9 @@ static const char * const ts_symbol_names[] = {
   [sym__attribute] = "_attribute",
   [sym__attribute_no_other] = "attributes",
   [sym__list_of_attributes_start_with_no_other] = "_list_of_attributes_start_with_no_other",
-  [sym_key_value_attribute] = "key_value_attribute",
-  [sym__key_value_attribute_key] = "_key_value_attribute_key",
-  [sym__key_value_attribute_value] = "_key_value_attribute_value",
+  [sym_attribute_key_value] = "attribute_key_value",
+  [sym__attribute_key_value_key] = "_attribute_key_value_key",
+  [sym__attribute_key_value_value] = "_attribute_key_value_value",
   [sym_field_definition] = "field_definition",
   [sym_unique_constraint] = "unique_constraint",
   [sym_foreign_constraint] = "foreign_constraint",
@@ -394,12 +394,12 @@ static const TSSymbol ts_symbol_map[] = {
   [sym_comment] = sym_comment,
   [anon_sym_Id] = anon_sym_Id,
   [anon_sym_Primary] = anon_sym_Primary,
-  [aux_sym__key_value_attribute_key_token1] = aux_sym__key_value_attribute_key_token1,
-  [aux_sym__key_value_attribute_value_token1] = sym_integer,
-  [aux_sym__key_value_attribute_value_token2] = sym_float,
-  [aux_sym__key_value_attribute_value_token3] = sym_string,
-  [sym_exclamation_mark_attribute] = sym_exclamation_mark_attribute,
-  [sym_other_attribute] = sym_other_attribute,
+  [aux_sym__attribute_key_value_key_token1] = aux_sym__attribute_key_value_key_token1,
+  [aux_sym__attribute_key_value_value_token1] = sym_integer,
+  [aux_sym__attribute_key_value_value_token2] = sym_float,
+  [aux_sym__attribute_key_value_value_token3] = sym_string,
+  [sym_attribute_exclamation_mark] = sym_attribute_exclamation_mark,
+  [sym_attribute_other] = sym_attribute_other,
   [sym__field_strictness_prefix] = sym__field_strictness_prefix,
   [sym_cascade_action] = sym_cascade_action,
   [sym_sql_constraint_name] = sym_sql_constraint_name,
@@ -480,9 +480,9 @@ static const TSSymbol ts_symbol_map[] = {
   [sym__attribute] = sym__attribute,
   [sym__attribute_no_other] = sym__attribute_no_other,
   [sym__list_of_attributes_start_with_no_other] = sym__list_of_attributes_start_with_no_other,
-  [sym_key_value_attribute] = sym_key_value_attribute,
-  [sym__key_value_attribute_key] = sym__key_value_attribute_key,
-  [sym__key_value_attribute_value] = sym__key_value_attribute_value,
+  [sym_attribute_key_value] = sym_attribute_key_value,
+  [sym__attribute_key_value_key] = sym__attribute_key_value_key,
+  [sym__attribute_key_value_value] = sym__attribute_key_value_value,
   [sym_field_definition] = sym_field_definition,
   [sym_unique_constraint] = sym_unique_constraint,
   [sym_foreign_constraint] = sym_foreign_constraint,
@@ -598,27 +598,27 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = true,
     .named = false,
   },
-  [aux_sym__key_value_attribute_key_token1] = {
+  [aux_sym__attribute_key_value_key_token1] = {
     .visible = true,
     .named = true,
   },
-  [aux_sym__key_value_attribute_value_token1] = {
+  [aux_sym__attribute_key_value_value_token1] = {
     .visible = true,
     .named = true,
   },
-  [aux_sym__key_value_attribute_value_token2] = {
+  [aux_sym__attribute_key_value_value_token2] = {
     .visible = true,
     .named = true,
   },
-  [aux_sym__key_value_attribute_value_token3] = {
+  [aux_sym__attribute_key_value_value_token3] = {
     .visible = true,
     .named = true,
   },
-  [sym_exclamation_mark_attribute] = {
+  [sym_attribute_exclamation_mark] = {
     .visible = true,
     .named = true,
   },
-  [sym_other_attribute] = {
+  [sym_attribute_other] = {
     .visible = true,
     .named = true,
   },
@@ -942,15 +942,15 @@ static const TSSymbolMetadata ts_symbol_metadata[] = {
     .visible = false,
     .named = true,
   },
-  [sym_key_value_attribute] = {
+  [sym_attribute_key_value] = {
     .visible = true,
     .named = true,
   },
-  [sym__key_value_attribute_key] = {
+  [sym__attribute_key_value_key] = {
     .visible = false,
     .named = true,
   },
-  [sym__key_value_attribute_value] = {
+  [sym__attribute_key_value_value] = {
     .visible = false,
     .named = true,
   },
@@ -6353,10 +6353,10 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(284);
       END_STATE();
     case 137:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_key_token1);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_key_token1);
       END_STATE();
     case 138:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token1);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token1);
       if (lookahead == '.') ADVANCE(88);
       if (lookahead == 'E' ||
           lookahead == 'e') ADVANCE(82);
@@ -6364,7 +6364,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead == '_') ADVANCE(138);
       END_STATE();
     case 139:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token1);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token1);
       if (lookahead == '.') ADVANCE(160);
       if (lookahead == 'E' ||
           lookahead == 'e') ADVANCE(159);
@@ -6377,14 +6377,14 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 140:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token2);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token2);
       if (lookahead == 'E' ||
           lookahead == 'e') ADVANCE(82);
       if (('0' <= lookahead && lookahead <= '9') ||
           lookahead == '_') ADVANCE(140);
       END_STATE();
     case 141:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token2);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token2);
       if (lookahead == 'E' ||
           lookahead == 'e') ADVANCE(159);
       if (('0' <= lookahead && lookahead <= '9') ||
@@ -6396,12 +6396,12 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 142:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token2);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token2);
       if (('0' <= lookahead && lookahead <= '9') ||
           lookahead == '_') ADVANCE(142);
       END_STATE();
     case 143:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token2);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token2);
       if (('0' <= lookahead && lookahead <= '9') ||
           lookahead == '_') ADVANCE(143);
       if (lookahead != 0 &&
@@ -6411,7 +6411,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 144:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '\n') ADVANCE(26);
       if (lookahead == '"') ADVANCE(148);
       if (lookahead == '\\') ADVANCE(144);
@@ -6422,7 +6422,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead != 0) ADVANCE(149);
       END_STATE();
     case 145:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '\n') ADVANCE(26);
       if (lookahead == '^') ADVANCE(150);
       if (lookahead == '\t' ||
@@ -6431,7 +6431,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead != 0) ADVANCE(149);
       END_STATE();
     case 146:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '"') ADVANCE(149);
       if (lookahead == '#') ADVANCE(128);
       if (lookahead == '\'') ADVANCE(155);
@@ -6450,7 +6450,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 147:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '"') ADVANCE(153);
       if (lookahead == '#') ADVANCE(149);
       if (lookahead == '\\') ADVANCE(145);
@@ -6461,7 +6461,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != '\n') ADVANCE(149);
       END_STATE();
     case 148:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '"') ADVANCE(153);
       if (lookahead == '#') ADVANCE(147);
       if (lookahead == '\\') ADVANCE(145);
@@ -6472,7 +6472,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != '\n') ADVANCE(149);
       END_STATE();
     case 149:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '"') ADVANCE(153);
       if (lookahead == '\\') ADVANCE(145);
       if (lookahead == '\t' ||
@@ -6482,7 +6482,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != '\n') ADVANCE(149);
       END_STATE();
     case 150:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '"') ADVANCE(148);
       if (lookahead == '\\') ADVANCE(144);
       if (lookahead == '\t' ||
@@ -6492,7 +6492,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != '\n') ADVANCE(149);
       END_STATE();
     case 151:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '#') ADVANCE(162);
       if (lookahead != 0 &&
           lookahead != '\t' &&
@@ -6501,7 +6501,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 152:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '#') ADVANCE(157);
       if (lookahead == '\'') ADVANCE(154);
       if (lookahead == '\t' ||
@@ -6511,7 +6511,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(157);
       END_STATE();
     case 153:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '#') ADVANCE(151);
       if (lookahead != 0 &&
           lookahead != '\t' &&
@@ -6520,7 +6520,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 154:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '#') ADVANCE(152);
       if (lookahead == '\'') ADVANCE(154);
       if (lookahead == '\t' ||
@@ -6530,7 +6530,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(157);
       END_STATE();
     case 155:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '\'') ADVANCE(162);
       if (lookahead == '\\') ADVANCE(157);
       if (lookahead == '\t' ||
@@ -6540,7 +6540,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
       if (lookahead != 0) ADVANCE(156);
       END_STATE();
     case 156:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '\'') ADVANCE(153);
       if (lookahead != 0 &&
           lookahead != '\t' &&
@@ -6549,7 +6549,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 157:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '\'') ADVANCE(154);
       if (lookahead == '\t' ||
           lookahead == '\n' ||
@@ -6558,7 +6558,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(157);
       END_STATE();
     case 158:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '-') ADVANCE(128);
       if (lookahead != 0 &&
           lookahead != '\t' &&
@@ -6567,7 +6567,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 159:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead == '+' ||
           lookahead == '-') ADVANCE(161);
       if (('0' <= lookahead && lookahead <= '9') ||
@@ -6579,7 +6579,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 160:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (('0' <= lookahead && lookahead <= '9') ||
           lookahead == '_') ADVANCE(141);
       if (lookahead != 0 &&
@@ -6589,7 +6589,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 161:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (('0' <= lookahead && lookahead <= '9') ||
           lookahead == '_') ADVANCE(143);
       if (lookahead != 0 &&
@@ -6599,7 +6599,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 162:
-      ACCEPT_TOKEN(aux_sym__key_value_attribute_value_token3);
+      ACCEPT_TOKEN(aux_sym__attribute_key_value_value_token3);
       if (lookahead != 0 &&
           lookahead != '\t' &&
           lookahead != '\n' &&
@@ -6607,7 +6607,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           lookahead != ' ') ADVANCE(162);
       END_STATE();
     case 163:
-      ACCEPT_TOKEN(sym_exclamation_mark_attribute);
+      ACCEPT_TOKEN(sym_attribute_exclamation_mark);
       if (lookahead == '-' ||
           ('0' <= lookahead && lookahead <= '9') ||
           ('A' <= lookahead && lookahead <= 'Z') ||
@@ -6615,7 +6615,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(163);
       END_STATE();
     case 164:
-      ACCEPT_TOKEN(sym_other_attribute);
+      ACCEPT_TOKEN(sym_attribute_other);
       if (lookahead == '=') ADVANCE(137);
       if (lookahead == '@') ADVANCE(165);
       if (('0' <= lookahead && lookahead <= '9') ||
@@ -6624,7 +6624,7 @@ static bool ts_lex(TSLexer *lexer, TSStateId state) {
           ('a' <= lookahead && lookahead <= 'z')) ADVANCE(164);
       END_STATE();
     case 165:
-      ACCEPT_TOKEN(sym_other_attribute);
+      ACCEPT_TOKEN(sym_attribute_other);
       if (('0' <= lookahead && lookahead <= '9') ||
           ('@' <= lookahead && lookahead <= 'Z') ||
           lookahead == '_' ||
@@ -8343,8 +8343,8 @@ static const uint16_t ts_parse_table[LARGE_STATE_COUNT][SYMBOL_COUNT] = {
     [sym_comment] = ACTIONS(3),
     [anon_sym_Id] = ACTIONS(1),
     [anon_sym_Primary] = ACTIONS(1),
-    [aux_sym__key_value_attribute_value_token1] = ACTIONS(1),
-    [aux_sym__key_value_attribute_value_token2] = ACTIONS(1),
+    [aux_sym__attribute_key_value_value_token1] = ACTIONS(1),
+    [aux_sym__attribute_key_value_value_token2] = ACTIONS(1),
     [sym__field_strictness_prefix] = ACTIONS(1),
     [sym_cascade_action] = ACTIONS(1),
     [anon_sym_Foreign] = ACTIONS(1),
@@ -20323,149 +20323,149 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(939), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(941), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(943), 1,
       sym__newline,
     STATE(297), 1,
       aux_sym_field_definition_repeat1,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(381), 3,
       sym__field_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
   [12352] = 8,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(945), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(948), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(951), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(954), 1,
       sym__newline,
     STATE(289), 1,
       aux_sym_field_definition_repeat1,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(381), 3,
       sym__field_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
   [12379] = 7,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(956), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(959), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(962), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(965), 1,
       sym__newline,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(290), 4,
       sym__entity_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
       aux_sym__entity_header_repeat1,
   [12404] = 7,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(967), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(969), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(971), 1,
       sym__newline,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(290), 4,
       sym__entity_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
       aux_sym__entity_header_repeat1,
   [12429] = 8,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(939), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(941), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(973), 1,
       sym__newline,
     STATE(289), 1,
       aux_sym_field_definition_repeat1,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(381), 3,
       sym__field_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
   [12456] = 8,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(939), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(941), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(975), 1,
       sym__newline,
     STATE(292), 1,
       aux_sym_field_definition_repeat1,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(381), 3,
       sym__field_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
   [12483] = 7,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(967), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(969), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(977), 1,
       sym__newline,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(290), 4,
       sym__entity_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
       aux_sym__entity_header_repeat1,
   [12508] = 7,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(979), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(981), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(983), 1,
       sym__newline,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(294), 4,
       sym__entity_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
       aux_sym__entity_header_repeat1,
   [12533] = 4,
     ACTIONS(3), 1,
@@ -20486,64 +20486,64 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(939), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(941), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(988), 1,
       sym__newline,
     STATE(289), 1,
       aux_sym_field_definition_repeat1,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(381), 3,
       sym__field_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
   [12579] = 7,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(990), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(992), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(994), 1,
       sym__newline,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(291), 4,
       sym__entity_attribute,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
       aux_sym__entity_header_repeat1,
   [12604] = 8,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(996), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(999), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1002), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(1005), 1,
       sym__newline,
     STATE(299), 1,
       aux_sym__list_of_attributes_start_with_no_other_repeat1,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(402), 2,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
   [12630] = 9,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(1007), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1009), 1,
       anon_sym_References,
     ACTIONS(1011), 1,
@@ -20551,9 +20551,9 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(307), 1,
       sym__attribute_no_other,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(366), 1,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
     STATE(506), 1,
       sym__list_of_attributes_start_with_no_other,
   [12658] = 3,
@@ -20573,20 +20573,20 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(1017), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1019), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(1021), 1,
       sym__newline,
     STATE(299), 1,
       aux_sym__list_of_attributes_start_with_no_other_repeat1,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(402), 2,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
   [12700] = 6,
     ACTIONS(3), 1,
       sym_comment,
@@ -20601,8 +20601,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_variable,
     ACTIONS(1025), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [12722] = 6,
     ACTIONS(3), 1,
       sym_comment,
@@ -20617,8 +20617,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym_variable,
     ACTIONS(1032), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [12744] = 6,
     ACTIONS(3), 1,
       sym_comment,
@@ -20639,9 +20639,9 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(1007), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1040), 1,
       anon_sym_References,
     ACTIONS(1042), 1,
@@ -20649,29 +20649,29 @@ static const uint16_t ts_small_parse_table[] = {
     STATE(307), 1,
       sym__attribute_no_other,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(366), 1,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
     STATE(511), 1,
       sym__list_of_attributes_start_with_no_other,
   [12794] = 8,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(1017), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1019), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(1044), 1,
       sym__newline,
     STATE(302), 1,
       aux_sym__list_of_attributes_start_with_no_other_repeat1,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(402), 2,
       sym__attribute,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
   [12820] = 2,
     ACTIONS(3), 1,
       sym_comment,
@@ -20701,34 +20701,34 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(1007), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1048), 1,
       sym__newline,
     STATE(307), 1,
       sym__attribute_no_other,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(366), 1,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
     STATE(499), 1,
       sym__list_of_attributes_start_with_no_other,
   [12877] = 8,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(1007), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1050), 1,
       sym__newline,
     STATE(307), 1,
       sym__attribute_no_other,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(366), 1,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
     STATE(494), 1,
       sym__list_of_attributes_start_with_no_other,
   [12902] = 3,
@@ -20747,17 +20747,17 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(1007), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1052), 1,
       sym__newline,
     STATE(307), 1,
       sym__attribute_no_other,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(366), 1,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
     STATE(491), 1,
       sym__list_of_attributes_start_with_no_other,
   [12942] = 2,
@@ -20860,17 +20860,17 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(1007), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1070), 1,
       sym__newline,
     STATE(307), 1,
       sym__attribute_no_other,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(366), 1,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
     STATE(490), 1,
       sym__list_of_attributes_start_with_no_other,
   [13096] = 8,
@@ -20894,17 +20894,17 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(937), 1,
-      aux_sym__key_value_attribute_key_token1,
+      aux_sym__attribute_key_value_key_token1,
     ACTIONS(1007), 1,
-      sym_exclamation_mark_attribute,
+      sym_attribute_exclamation_mark,
     ACTIONS(1077), 1,
       sym__newline,
     STATE(307), 1,
       sym__attribute_no_other,
     STATE(337), 1,
-      sym__key_value_attribute_key,
+      sym__attribute_key_value_key,
     STATE(366), 1,
-      sym_key_value_attribute,
+      sym_attribute_key_value,
     STATE(504), 1,
       sym__list_of_attributes_start_with_no_other,
   [13146] = 2,
@@ -21063,11 +21063,11 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(1106), 1,
       sym_comment,
     STATE(359), 1,
-      sym__key_value_attribute_value,
+      sym__attribute_key_value_value,
     ACTIONS(1108), 5,
-      aux_sym__key_value_attribute_value_token1,
-      aux_sym__key_value_attribute_value_token2,
-      aux_sym__key_value_attribute_value_token3,
+      aux_sym__attribute_key_value_value_token1,
+      aux_sym__attribute_key_value_value_token2,
+      aux_sym__attribute_key_value_value_token3,
       sym_char,
       sym_string,
   [13360] = 3,
@@ -21129,11 +21129,11 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(676), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(674), 4,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
       anon_sym_DOT,
   [13448] = 3,
     ACTIONS(3), 1,
@@ -21143,8 +21143,8 @@ static const uint16_t ts_small_parse_table[] = {
       sym__varid,
     ACTIONS(1126), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13461] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -21183,13 +21183,13 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(672), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(843), 1,
       anon_sym_DOT,
     ACTIONS(670), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13523] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -21229,13 +21229,13 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(668), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(843), 1,
       anon_sym_DOT,
     ACTIONS(664), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13587] = 3,
     ACTIONS(3), 1,
       sym_comment,
@@ -21274,13 +21274,13 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(680), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(843), 1,
       anon_sym_DOT,
     ACTIONS(678), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13649] = 6,
     ACTIONS(3), 1,
       sym_comment,
@@ -21302,17 +21302,17 @@ static const uint16_t ts_small_parse_table[] = {
       sym__varid,
     ACTIONS(890), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13681] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(1136), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(1134), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13693] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -21328,20 +21328,20 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(718), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(716), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13721] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(722), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(720), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13733] = 3,
     ACTIONS(3), 1,
       sym_comment,
@@ -21355,56 +21355,56 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(754), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(752), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13757] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(758), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(756), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13769] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(1140), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(1138), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13781] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(762), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(760), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13793] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(710), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(708), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13805] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(694), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(692), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13817] = 3,
     ACTIONS(3), 1,
       sym_comment,
@@ -21439,20 +21439,20 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(706), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(704), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13871] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(738), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(736), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13883] = 4,
     ACTIONS(3), 1,
       sym_comment,
@@ -21467,20 +21467,20 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(684), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(682), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13909] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(698), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(696), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13921] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -21505,29 +21505,29 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(714), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(712), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13961] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(1146), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(1144), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13973] = 3,
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(746), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(744), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [13985] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -21585,11 +21585,11 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(734), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(732), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [14073] = 4,
     ACTIONS(3), 1,
       sym_comment,
@@ -21613,11 +21613,11 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(726), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(724), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [14111] = 2,
     ACTIONS(3), 1,
       sym_comment,
@@ -21630,11 +21630,11 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(730), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(728), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [14133] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -21668,11 +21668,11 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(702), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(700), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [14185] = 5,
     ACTIONS(3), 1,
       sym_comment,
@@ -21720,11 +21720,11 @@ static const uint16_t ts_small_parse_table[] = {
     ACTIONS(3), 1,
       sym_comment,
     ACTIONS(1163), 1,
-      sym_other_attribute,
+      sym_attribute_other,
     ACTIONS(1161), 3,
       sym__newline,
-      aux_sym__key_value_attribute_key_token1,
-      sym_exclamation_mark_attribute,
+      aux_sym__attribute_key_value_key_token1,
+      sym_attribute_exclamation_mark,
   [14259] = 2,
     ACTIONS(3), 1,
       sym_comment,
@@ -23506,8 +23506,8 @@ static const TSParseActionEntry ts_parse_actions[] = {
   [1128] = {.entry = {.count = 1, .reusable = true}}, SHIFT(60),
   [1130] = {.entry = {.count = 1, .reusable = true}}, SHIFT(48),
   [1132] = {.entry = {.count = 1, .reusable = true}}, SHIFT(335),
-  [1134] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_key_value_attribute, 2),
-  [1136] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_key_value_attribute, 2),
+  [1134] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym_attribute_key_value, 2),
+  [1136] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym_attribute_key_value, 2),
   [1138] = {.entry = {.count = 1, .reusable = true}}, REDUCE(sym__attribute_no_other, 1),
   [1140] = {.entry = {.count = 1, .reusable = false}}, REDUCE(sym__attribute_no_other, 1),
   [1142] = {.entry = {.count = 1, .reusable = true}}, SHIFT(39),

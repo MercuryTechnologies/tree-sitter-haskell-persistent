@@ -236,15 +236,15 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "key_value_attribute"
+          "name": "attribute_key_value"
         },
         {
           "type": "SYMBOL",
-          "name": "exclamation_mark_attribute"
+          "name": "attribute_exclamation_mark"
         },
         {
           "type": "SYMBOL",
-          "name": "other_attribute"
+          "name": "attribute_other"
         }
       ]
     },
@@ -253,11 +253,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "key_value_attribute"
+          "name": "attribute_key_value"
         },
         {
           "type": "SYMBOL",
-          "name": "exclamation_mark_attribute"
+          "name": "attribute_exclamation_mark"
         }
       ]
     },
@@ -282,20 +282,20 @@
       "named": true,
       "value": "attributes"
     },
-    "key_value_attribute": {
+    "attribute_key_value": {
       "type": "SEQ",
       "members": [
         {
           "type": "SYMBOL",
-          "name": "_key_value_attribute_key"
+          "name": "_attribute_key_value_key"
         },
         {
           "type": "SYMBOL",
-          "name": "_key_value_attribute_value"
+          "name": "_attribute_key_value_value"
         }
       ]
     },
-    "_key_value_attribute_key": {
+    "_attribute_key_value_key": {
       "type": "ALIAS",
       "content": {
         "type": "PATTERN",
@@ -304,7 +304,7 @@
       "named": true,
       "value": "name"
     },
-    "_key_value_attribute_value": {
+    "_attribute_key_value_value": {
       "type": "CHOICE",
       "members": [
         {
@@ -396,11 +396,11 @@
         }
       ]
     },
-    "exclamation_mark_attribute": {
+    "attribute_exclamation_mark": {
       "type": "PATTERN",
       "value": "![\\w-]+"
     },
-    "other_attribute": {
+    "attribute_other": {
       "type": "PATTERN",
       "value": "[\\w@]+"
     },
@@ -487,11 +487,11 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "exclamation_mark_attribute"
+          "name": "attribute_exclamation_mark"
         },
         {
           "type": "SYMBOL",
-          "name": "key_value_attribute"
+          "name": "attribute_key_value"
         }
       ]
     },

@@ -208,14 +208,14 @@ module.exports = grammar({
     _field_attribute: $ => $._attribute,
 
     _attribute: $ => choice(
-      $.key_value_attribute,
-      $.exclamation_mark_attribute,
-      $.other_attribute
+      $.attribute_key_value,
+      $.attribute_exclamation_mark,
+      $.attribute_other
     ),
 
     _attribute_no_other: $ => choice(
-      $.key_value_attribute,
-      $.exclamation_mark_attribute
+      $.attribute_key_value,
+      $.attribute_exclamation_mark
     ),
 
     _list_of_attributes_start_with_no_other: $ => alias(
@@ -223,15 +223,15 @@ module.exports = grammar({
       $.attributes
     ),
 
-    key_value_attribute: $ => seq(
-      $._key_value_attribute_key,
-      $._key_value_attribute_value
+    attribute_key_value: $ => seq(
+      $._attribute_key_value_key,
+      $._attribute_key_value_value
     ),
 
     // FIXME: Parse key name with "=" as a single token to avoid ambiguity between an attribute key and a field name. There must be a cleaner way - perhaps parse field name and attribue key as the same token, so that the lexical precedence rule can resolve it.
-    _key_value_attribute_key: $ => alias(/\w+=/, $.name),
+    _attribute_key_value_key: $ => alias(/\w+=/, $.name),
 
-    _key_value_attribute_value: $ => choice(
+    _attribute_key_value_value: $ => choice(
       $._stringly,
       alias(
         token(prec('attribute-value-number-literal', decimal)),
@@ -253,10 +253,10 @@ module.exports = grammar({
       )
     ),
 
-    exclamation_mark_attribute: _ => /![\w-]+/,
+    attribute_exclamation_mark: _ => /![\w-]+/,
 
     // Maybe, MigrationOnly, noreference, and others
-    other_attribute: _ => /[\w@]+/,
+    attribute_other: _ => /[\w@]+/,
 
     field_definition: $ => seq(
       optional($._field_strictness_prefix),
@@ -277,8 +277,8 @@ module.exports = grammar({
     ),
 
     _unique_constraint_attribute: $ => choice(
-      $.exclamation_mark_attribute,
-      $.key_value_attribute
+      $.attribute_exclamation_mark,
+      $.attribute_key_value
     ),
 
     sql_constraint_name: _ => /[a-zA-Z][\w]+/,

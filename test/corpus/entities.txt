@@ -23,9 +23,9 @@ Person @MigrationOnly !no-migrate a=b
   (entity_definition
     (type_name
       (type))
-    (other_attribute)
-    (exclamation_mark_attribute)
-    (key_value_attribute
+    (attribute_other)
+    (attribute_exclamation_mark)
+    (attribute_key_value
       (name)
       (string))))
 
@@ -303,7 +303,7 @@ Person
         (type_name
           (type))
         (attributes
-          (key_value_attribute
+          (attribute_key_value
             (name)
             (string)))))))
 
@@ -356,21 +356,21 @@ Person
         (type_name
           (type))
         (attributes
-          (other_attribute)
-          (key_value_attribute
+          (attribute_other)
+          (attribute_key_value
             (name)
             (string))
-          (key_value_attribute
+          (attribute_key_value
             (name)
             (integer))
-          (key_value_attribute
+          (attribute_key_value
             (name)
             (float))
-          (key_value_attribute
+          (attribute_key_value
             (name)
             (float))
-          (exclamation_mark_attribute)
-          (other_attribute))))))
+          (attribute_exclamation_mark)
+          (attribute_other))))))
 
 ================================================================================
 Entity with field attribute with special characters
@@ -391,7 +391,7 @@ Person
         (type_name
           (type))
         (attributes
-          (key_value_attribute
+          (attribute_key_value
             (name)
             (string)))))))
 
@@ -427,7 +427,7 @@ Person
         (fields
           (variable))
         (attributes
-          (key_value_attribute
+          (attribute_key_value
             (name)
             (string)))))))
 
@@ -460,7 +460,7 @@ Person
         (fields
           (variable))
         (attributes
-          (key_value_attribute
+          (attribute_key_value
             (name)
             (string)))))))
 
@@ -502,7 +502,7 @@ User
           (variable)
           (variable))
         (attributes
-          (exclamation_mark_attribute))))))
+          (attribute_exclamation_mark))))))
 
 ================================================================================
 Entity with foreign constraint, cascade
