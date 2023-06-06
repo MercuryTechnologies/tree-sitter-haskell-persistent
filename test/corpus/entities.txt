@@ -23,11 +23,12 @@ Person @MigrationOnly !no-migrate a=b
   (entity_definition
     (type_name
       (type))
-    (attribute_other)
-    (attribute_exclamation_mark)
-    (attribute_key_value
-      (name)
-      (string))))
+    (attributes
+      (attribute_name)
+      (attribute_exclamation_mark)
+      (attribute_key_value
+        (attribute_name)
+        (string)))))
 
 ================================================================================
 Entity with one field
@@ -304,7 +305,7 @@ Person
           (type))
         (attributes
           (attribute_key_value
-            (name)
+            (attribute_name)
             (string)))))))
 
 ================================================================================
@@ -315,7 +316,7 @@ Email
     firstPart   Text
     secondPart  Text
 
-    Primary firstPart secondPart
+    Primary firstPart secondPart sql=b
 
 --------------------------------------------------------------------------------
 
@@ -335,7 +336,11 @@ Email
       (natural_key
         (fields
           (variable)
-          (variable))))))
+          (variable))
+        (attributes
+          (attribute_key_value
+            (attribute_name)
+            (string)))))))
 
 ================================================================================
 Entity with field attributes
@@ -356,21 +361,21 @@ Person
         (type_name
           (type))
         (attributes
-          (attribute_other)
+          (attribute_name)
           (attribute_key_value
-            (name)
+            (attribute_name)
             (string))
           (attribute_key_value
-            (name)
+            (attribute_name)
             (integer))
           (attribute_key_value
-            (name)
+            (attribute_name)
             (float))
           (attribute_key_value
-            (name)
+            (attribute_name)
             (float))
           (attribute_exclamation_mark)
-          (attribute_other))))))
+          (attribute_name))))))
 
 ================================================================================
 Entity with field attribute with special characters
@@ -392,7 +397,7 @@ Person
           (type))
         (attributes
           (attribute_key_value
-            (name)
+            (attribute_name)
             (string)))))))
 
 ================================================================================
@@ -428,7 +433,7 @@ Person
           (variable))
         (attributes
           (attribute_key_value
-            (name)
+            (attribute_name)
             (string)))))))
 
 ================================================================================
@@ -461,7 +466,7 @@ Person
           (variable))
         (attributes
           (attribute_key_value
-            (name)
+            (attribute_name)
             (string)))))))
 
 ================================================================================

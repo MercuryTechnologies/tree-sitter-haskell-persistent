@@ -82,6 +82,10 @@
       "required": true,
       "types": [
         {
+          "type": "attribute_name",
+          "named": true
+        },
+        {
           "type": "char",
           "named": true
         },
@@ -91,10 +95,6 @@
         },
         {
           "type": "integer",
-          "named": true
-        },
-        {
-          "type": "name",
           "named": true
         },
         {
@@ -121,7 +121,7 @@
           "named": true
         },
         {
-          "type": "attribute_other",
+          "type": "attribute_name",
           "named": true
         }
       ]
@@ -393,15 +393,7 @@
       "required": false,
       "types": [
         {
-          "type": "attribute_exclamation_mark",
-          "named": true
-        },
-        {
-          "type": "attribute_key_value",
-          "named": true
-        },
-        {
-          "type": "attribute_other",
+          "type": "attributes",
           "named": true
         },
         {
@@ -1551,7 +1543,7 @@
       }
     },
     "children": {
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "types": [
         {
@@ -2316,7 +2308,7 @@
     "named": true
   },
   {
-    "type": "attribute_other",
+    "type": "attribute_name",
     "named": true
   },
   {
@@ -2374,10 +2366,6 @@
   {
     "type": "module",
     "named": false
-  },
-  {
-    "type": "name",
-    "named": true
   },
   {
     "type": "nominal",

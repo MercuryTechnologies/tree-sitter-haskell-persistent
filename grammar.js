@@ -6,6 +6,7 @@ const type = require('./grammar/type.js')
 
 const decimal = /[0-9][0-9_]*/
 const exponent = /[eE][+-]?[0-9_]+/
+const attribute_name = /[\w@!-]+/
 
 module.exports = grammar({
   name: 'haskell_persistent',
@@ -136,7 +137,6 @@ module.exports = grammar({
      * This problem might be solvable if `type.js` were to be refactored.
      */
     [$.annotated_type_variable, $.type_name],
-
   ],
 
   word: $ => $._varid,
@@ -169,7 +169,7 @@ module.exports = grammar({
     _entity_header: $ => seq(
       optional($.is_sum_marker),
       field('name', $._entity_name),
-      repeat($._entity_attribute),
+      alias(repeat($._entity_attribute), $.attributes),
       $._newline
     ),
 
@@ -192,16 +192,20 @@ module.exports = grammar({
     surrogate_key: $ => seq(
       'Id',
       field('type', $._persistent_type),
-      optional($._list_of_attributes_start_with_no_other)
+      optional(alias(repeat($._attribute), $.attributes))
     ),
 
     natural_key: $ => seq(
       'Primary',
       $._list_of_fields,
-      optional($._list_of_attributes_start_with_no_other)
+      optional($._list_of_attributes_unambiguous_start)
     ),
 
-    _list_of_fields: $ => alias(repeat1($._field_name), $.fields),
+    _list_of_fields: $ => 
+      alias(
+        repeat1($._field_name),
+        $.fields
+    ),
 
     _entity_attribute: $ => $._attribute,
 
@@ -210,26 +214,32 @@ module.exports = grammar({
     _attribute: $ => choice(
       $.attribute_key_value,
       $.attribute_exclamation_mark,
-      $.attribute_other
+      $.attribute_name
     ),
 
-    _attribute_no_other: $ => choice(
-      $.attribute_key_value,
-      $.attribute_exclamation_mark
+    _attribute_unambiguous: $ => choice(
+      $.attribute_exclamation_mark,
+      alias($._attribute_sql, $.attribute_key_value)
     ),
 
-    _list_of_attributes_start_with_no_other: $ => alias(
-      seq($._attribute_no_other, repeat($._attribute)),
-      $.attributes
-    ),
-
-    attribute_key_value: $ => seq(
-      $._attribute_key_value_key,
+    _attribute_sql: $ => seq(
+      alias('sql', $.attribute_name),
+      '=',
       $._attribute_key_value_value
     ),
 
-    // FIXME: Parse key name with "=" as a single token to avoid ambiguity between an attribute key and a field name. There must be a cleaner way - perhaps parse field name and attribue key as the same token, so that the lexical precedence rule can resolve it.
-    _attribute_key_value_key: $ => alias(/\w+=/, $.name),
+    _list_of_attributes_unambiguous_start: $ => alias(
+      seq($._attribute_unambiguous, repeat($._attribute)),
+      $.attributes
+    ),
+
+    attribute_exclamation_mark: $ => token(seq('!', token.immediate(attribute_name))),
+
+    attribute_key_value: $ => seq(
+      $.attribute_name,
+      '=',
+      $._attribute_key_value_value
+    ),
 
     _attribute_key_value_value: $ => choice(
       $._stringly,
@@ -253,10 +263,8 @@ module.exports = grammar({
       )
     ),
 
-    attribute_exclamation_mark: _ => /![\w-]+/,
-
     // Maybe, MigrationOnly, noreference, and others
-    attribute_other: _ => /[\w@]+/,
+    attribute_name: _ => attribute_name,
 
     field_definition: $ => seq(
       optional($._field_strictness_prefix),
@@ -273,12 +281,7 @@ module.exports = grammar({
     unique_constraint: $ => seq(
       $._haskell_constraint_name,
       $._list_of_fields,
-      optional($._list_of_attributes_start_with_no_other)
-    ),
-
-    _unique_constraint_attribute: $ => choice(
-      $.attribute_exclamation_mark,
-      $.attribute_key_value
+      optional($._list_of_attributes_unambiguous_start)
     ),
 
     sql_constraint_name: _ => /[a-zA-Z][\w]+/,
@@ -295,7 +298,7 @@ module.exports = grammar({
           alias($._list_of_fields, $.references)
         )
       ),
-      optional($._list_of_attributes_start_with_no_other)
+      optional($._list_of_attributes_unambiguous_start)
     ),
 
     // See deriving in tree-sitter-haskell/grammar/data.js for the complete syntax. Persistent only supports a list of class names
