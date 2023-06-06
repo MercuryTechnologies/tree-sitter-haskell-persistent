@@ -6,7 +6,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))))
@@ -19,7 +19,7 @@ Person @MigrationOnly !no-migrate a=b
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -39,7 +39,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -58,7 +58,7 @@ Indented entity
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -79,7 +79,7 @@ Entity with CPP comment
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (comment)
   (comment)
   (comment)
@@ -103,7 +103,7 @@ Entity with comments
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (comment)
   (entity_definition
     (type_name
@@ -136,7 +136,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -163,7 +163,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -186,7 +186,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -206,7 +206,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -229,7 +229,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -256,7 +256,7 @@ CustomerTransfer
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -295,7 +295,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -320,7 +320,7 @@ Email
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -351,7 +351,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -386,7 +386,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -412,7 +412,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -447,7 +447,7 @@ Person
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -482,7 +482,7 @@ User
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -522,7 +522,7 @@ User
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))
@@ -562,7 +562,7 @@ User
 
 --------------------------------------------------------------------------------
 
-(quasi_quotation
+(persistent_definitions
   (entity_definition
     (type_name
       (type))

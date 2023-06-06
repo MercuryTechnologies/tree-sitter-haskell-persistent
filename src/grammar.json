@@ -2,7 +2,7 @@
   "name": "haskell_persistent",
   "word": "_varid",
   "rules": {
-    "quasi_quotation": {
+    "persistent_definitions": {
       "type": "REPEAT",
       "content": {
         "type": "SYMBOL",

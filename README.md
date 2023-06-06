@@ -1,5 +1,4 @@
-# tree-sitter-haskell-persistent
-
+# tree-sitter-haskell-persistent 
 Persistent grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter).
 
 ## References
@@ -9,4 +8,4 @@ Persistent grammar for [tree-sitter](https://github.com/tree-sitter/tree-sitter)
 
 ## Development and Contributing
 
-Please refer to the tree-sitter documentation for [getting started](https://tree-sitter.github.io/tree-sitter/creating-parsers#getting-started) and its (command overview)[https://tree-sitter.github.io/tree-sitter/creating-parsers#tool-overview].
+Please refer to the tree-sitter documentation for [getting started](https://tree-sitter.github.io/tree-sitter/creating-parsers#getting-started) and its [command overview](https://tree-sitter.github.io/tree-sitter/creating-parsers#tool-overview).

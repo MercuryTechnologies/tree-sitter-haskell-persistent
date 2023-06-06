@@ -143,7 +143,7 @@ module.exports = grammar({
 
   // Parsing type names and field names is based on tree-sitter-haskell, the rest is based on the parsing from Database.Persist.Quasi.Internal
   rules: {
-    quasi_quotation: $ => repeat($.entity_definition),
+    persistent_definitions: $ => repeat($.entity_definition),
 
     entity_definition: $ => seq(
       $._entity_header,

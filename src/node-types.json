@@ -1271,6 +1271,21 @@
     }
   },
   {
+    "type": "persistent_definitions",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "entity_definition",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "promoted",
     "named": true,
     "fields": {},
@@ -1468,21 +1483,6 @@
         },
         {
           "type": "type_variable",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "quasi_quotation",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": false,
-      "types": [
-        {
-          "type": "entity_definition",
           "named": true
         }
       ]
