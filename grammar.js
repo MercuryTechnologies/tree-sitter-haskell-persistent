@@ -80,30 +80,6 @@ module.exports = grammar({
   ],
 
   conflicts: $ => [
-    /**
-     * This could be done with the second named precedence further up, but it somehow overrides symbolic infix
-     * constructors.
-     * Needs more investigation.
-     */
-    [$._type_infix, $.type_infix],
-
-    /**
-     * Optional context for a data/newtype decl with infix types:
-     *
-     * data a ~ b => A a b
-     * data a + b
-     */
-    [$.type_name, $._simpletype_infix],
-
-    /**
-     * Same as above, but with regular types:
-     *
-     * data A a b
-     * data C a b => A a b
-     * data C Int a => A a
-     * data B Int ~ B a => A a
-     */
-    [$.type_name, $._simpletype],
     [$._atype, $.constraint],
 
     /**
@@ -115,11 +91,6 @@ module.exports = grammar({
      * After the `a`, the closing paren is ambiguous.
      */
     [$._type_infix, $.constraint],
-
-    /**
-     * Ambiguity between symbolic and regular type family equations.
-     */
-    [$.type_name, $.tyfam_pat],
 
     /**
      * Same as `exp_apply`, but for types.
