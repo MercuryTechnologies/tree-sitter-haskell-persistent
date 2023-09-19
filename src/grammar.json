@@ -3830,28 +3830,12 @@
   ],
   "conflicts": [
     [
-      "_type_infix",
-      "type_infix"
-    ],
-    [
-      "type_name",
-      "_simpletype_infix"
-    ],
-    [
-      "type_name",
-      "_simpletype"
-    ],
-    [
       "_atype",
       "constraint"
     ],
     [
       "_type_infix",
       "constraint"
-    ],
-    [
-      "type_name",
-      "tyfam_pat"
     ],
     [
       "type_apply",
